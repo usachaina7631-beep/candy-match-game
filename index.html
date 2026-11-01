@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Candy Dhamaka — Free Candy Match 3 Game | Play Online, 100 Levels</title>
-<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades -->
+<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) -->
 <meta name="description" content="Play Candy Dhamaka, the free candy match game, online in your browser. Swap and match 3 or more candies, unlock striped candies, wrapped candies and colour bombs across 100 fun levels. No download needed — works on mobile and PC.">
 <meta name="keywords" content="candy match game, match 3 game, candy puzzle game online, free candy game, play candy match online">
 <meta name="robots" content="index, follow">
@@ -64,12 +64,15 @@ button.armed{background:linear-gradient(180deg,#ff5f6d,#ff2e63);color:#fff}
 #levelGrid button.done{background:linear-gradient(180deg,#a8ff78,#43c465);color:#083d17}
 .shopRow{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.1);border-radius:12px;padding:9px 12px;margin:7px 0;font-size:14px}
 .helpText{text-align:left;font-size:13.5px;line-height:1.55}
+#btnBigFull{width:min(520px,96vw);padding:14px;font-size:18px;border-radius:16px;background:linear-gradient(90deg,#ff8c42,#f107a3);color:#fff;letter-spacing:.4px;margin-bottom:10px;box-shadow:0 5px 0 rgba(0,0,0,.3)}
 footer{margin-top:16px;font-size:12px;opacity:.85;text-align:center;max-width:520px;line-height:1.6}
 </style>
 </head>
 <body>
 <h1>🍬 Candy Dhamaka</h1>
 <div class="tagline">Candy Match 3 ka full dhamaka! Swap • Match • Blast — 100 levels, free, no download!</div>
+
+<button id="btnBigFull">⛶ FULL SCREEN ME KHELO</button>
 
 <div id="hud">
   <span class="chip" id="hudLevel">LEVEL 1</span>
@@ -165,7 +168,7 @@ const $=id=>document.getElementById(id);
 let save=JSON.parse(localStorage.getItem('candyMatchSave')||'null')||{unlocked:1,done:{},coins:250,boost:{hammer:3,shuffle:2,swap:1,moves:2},lastDaily:'',sound:true};
 let level=1,board=[],score=0,moves=0,target=0,numColors=4,sel=null,busy=false,paused=false,streak=0,hammerArmed=false,freeSwapArmed=false,cursor={r:0,c:0},gameOver=false;
 function persist(){localStorage.setItem('candyMatchSave',JSON.stringify(save));}
-function levelCfg(lv){const colors=lv<=15?4:(lv<=50?5:6);const tgt=2500+lv*650;const mv=Math.max(14,26-Math.floor(lv/6));return{colors,tgt,mv};}
+function levelCfg(lv){const colors=lv<=15?4:(lv<=50?5:6);const tgt=3000+lv*750;const mv=Math.max(13,24-Math.floor(lv/6));return{colors,tgt,mv};}
 function rnd(n){return Math.floor(Math.random()*n);}
 function newCandy(){return{t:rnd(numColors),sp:null};}
 function wouldMatch(b,r,c){const t=b[r][c].t;let n=1;for(let i=c-1;i>=0&&b[r][i].t===t;i--)n++;for(let i=c+1;i<N&&b[r][i].t===t;i++)n++;if(n>=3)return true;n=1;for(let i=r-1;i>=0&&b[i][c].t===t;i--)n++;for(let i=r+1;i<N&&b[i][c].t===t;i++)n++;return n>=3;}
@@ -251,6 +254,7 @@ $('btnPause').onclick=()=>{paused=true;$('ovPause').classList.add('show');};
 $('btnResume').onclick=()=>{paused=false;$('ovPause').classList.remove('show');};
 $('btnPauseRestart').onclick=()=>{paused=false;$('ovPause').classList.remove('show');startLevel(level);};
 $('btnFull').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();};
+$('btnBigFull').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();};
 $('btnShop').onclick=()=>{$('shopCoins').textContent='Tumhare coins: 🪙 '+save.coins;$('ovShop').classList.add('show');};
 $('btnCloseShop').onclick=()=>$('ovShop').classList.remove('show');
 document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{const k=b.dataset.buy;const price={hammer:50,shuffle:40,swap:60,moves:40}[k];if(save.coins>=price){save.coins-=price;save.boost[k]++;persist();render();$('shopCoins').textContent='Tumhare coins: 🪙 '+save.coins;beep(700,.08);}else{alert('Coins kam hain! Bade matches banao, zyada coins kamao 🪙');}});
