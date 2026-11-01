@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://usachaina7631-beep.github.io/candy-match-game/sitemap.xml

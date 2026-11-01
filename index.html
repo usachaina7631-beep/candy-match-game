@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Candy Match Game — Play Free Online | 100 Levels Match-3 Puzzle</title>
+<meta name="description" content="Play Candy Match Game free online in your browser. Swap and match 3 or more candies, unlock striped candies, wrapped candies and colour bombs across 100 fun levels. No download needed — works on mobile and PC.">
+<meta name="keywords" content="candy match game, match 3 game, candy puzzle game online, free candy game, play candy match online">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://usachaina7631-beep.github.io/candy-match-game/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Candy Match Game — Play Free Online">
+<meta property="og:description" content="Swap, match and blast candies across 100 levels. Free browser game — no download, works on mobile and PC.">
+<meta property="og:url" content="https://usachaina7631-beep.github.io/candy-match-game/">
+<meta name="theme-color" content="#7b2ff7">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍬</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"Candy Match Game","description":"A free match-3 candy puzzle game with 100 levels, boosters and special candies. Play online in your browser on mobile or PC.","url":"https://usachaina7631-beep.github.io/candy-match-game/","applicationCategory":"Game","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"inLanguage":"en"}
+</script>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:linear-gradient(160deg,#2b1055 0%,#7b2ff7 55%,#f107a3 130%);min-height:100vh;color:#fff;display:flex;flex-direction:column;align-items:center;padding:10px 8px 30px;user-select:none}
+h1{font-size:clamp(22px,5vw,34px);margin:6px 0 2px;text-shadow:0 3px 0 rgba(0,0,0,.25);letter-spacing:.5px}
+.tagline{opacity:.9;font-size:13px;margin-bottom:10px;text-align:center}
+#hud{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:520px;width:100%;margin-bottom:8px}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 11px;font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
+#progressWrap{width:min(520px,96vw);background:rgba(0,0,0,.3);border-radius:999px;height:20px;position:relative;margin-bottom:10px;overflow:hidden;border:1px solid rgba(255,255,255,.25)}
+#progressBar{height:100%;width:0%;background:linear-gradient(90deg,#ffd93d,#ff8c42);transition:width .3s}
+#progressText{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;text-shadow:0 1px 2px #000}
+#boardWrap{position:relative;width:min(520px,96vw)}
+#board{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;background:rgba(0,0,0,.28);padding:8px;border-radius:18px;border:2px solid rgba(255,255,255,.22);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.cell{aspect-ratio:1;border-radius:22%;display:flex;align-items:center;justify-content:center;font-size:clamp(20px,6.4vw,34px);cursor:pointer;position:relative;transition:transform .12s, box-shadow .12s;border:2px solid rgba(255,255,255,.15)}
+.cell.c0{background:radial-gradient(circle at 32% 30%,#ff8fa3,#e63950)}
+.cell.c1{background:radial-gradient(circle at 32% 30%,#ffc46b,#f08c00)}
+.cell.c2{background:radial-gradient(circle at 32% 30%,#fff3a3,#e6c200)}
+.cell.c3{background:radial-gradient(circle at 32% 30%,#a7f3a0,#2fbf4f)}
+.cell.c4{background:radial-gradient(circle at 32% 30%,#a0c8ff,#2f6fde)}
+.cell.c5{background:radial-gradient(circle at 32% 30%,#e3a6ff,#9333ea)}
+.cell.sel{box-shadow:0 0 0 3px #fff,0 0 14px #fff;transform:scale(1.1);z-index:2}
+.cell.hint{animation:hintPulse .5s ease-in-out infinite alternate}
+@keyframes hintPulse{from{box-shadow:0 0 0 2px #ffe066}to{box-shadow:0 0 0 5px #ffe066,0 0 16px #ffe066}}
+.cell.pop{animation:pop .28s forwards}
+@keyframes pop{to{transform:scale(0);opacity:0}}
+.cell .badge{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.55em;pointer-events:none;text-shadow:0 0 4px #000}
+.cell.cursor{box-shadow:0 0 0 3px #4dd0e1}
+#controls,#boosters{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px;max-width:520px}
+button{background:rgba(255,255,255,.92);color:#4a148c;border:none;border-radius:999px;padding:8px 13px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+button:active{transform:translateY(2px);box-shadow:none}
+button:disabled{opacity:.45;cursor:default}
+button.boost{background:linear-gradient(180deg,#ffe259,#ffa751);color:#5d2c00}
+button.armed{background:linear-gradient(180deg,#ff5f6d,#ff2e63);color:#fff}
+.floatScore{position:absolute;font-weight:900;font-size:20px;color:#ffe066;text-shadow:0 2px 3px #000;pointer-events:none;animation:floatUp .8s forwards;z-index:5}
+@keyframes floatUp{to{transform:translateY(-38px);opacity:0}}
+.overlay{position:fixed;inset:0;background:rgba(20,5,40,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:14px}
+.overlay.show{display:flex}
+.panel{background:linear-gradient(170deg,#3b1470,#5b21b6);border:2px solid rgba(255,255,255,.3);border-radius:20px;padding:20px;max-width:440px;width:100%;max-height:88vh;overflow:auto;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.panel h2{margin:4px 0 10px}
+#levelGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:10px}
+#levelGrid button{padding:9px 0;font-size:14px}
+#levelGrid button.locked{opacity:.4}
+#levelGrid button.done{background:linear-gradient(180deg,#a8ff78,#43c465);color:#083d17}
+.shopRow{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.1);border-radius:12px;padding:9px 12px;margin:7px 0;font-size:14px}
+.helpText{text-align:left;font-size:13.5px;line-height:1.55}
+footer{margin-top:16px;font-size:12px;opacity:.85;text-align:center;max-width:520px;line-height:1.6}
+</style>
+</head>
+<body>
+<h1>🍬 Candy Match Game</h1>
+<div class="tagline">Swap • Match • Blast — 100 levels of sweet puzzle fun. Free, no download!</div>
+
+<div id="hud">
+  <span class="chip" id="hudLevel">LEVEL 1</span>
+  <span class="chip" id="hudMoves">MOVES 22</span>
+  <span class="chip" id="hudScore">SCORE 0</span>
+  <span class="chip">❤️❤️❤️❤️❤️ FULL</span>
+  <span class="chip" id="hudCoins">🪙 250</span>
+  <span class="chip" id="hudStreak">🔥 Streak 0</span>
+</div>
+<div id="progressWrap"><div id="progressBar"></div><div id="progressText">🎯 Score 0 / 3,000</div></div>
+
+<div id="boardWrap"><div id="board"></div></div>
+
+<div id="boosters">
+  <button class="boost" id="bHammer">🔨 Lollipop <span id="nHammer">3</span></button>
+  <button class="boost" id="bShuffle">🔀 Shuffle <span id="nShuffle">2</span></button>
+  <button class="boost" id="bSwap">↔️ Free Swap <span id="nSwap">1</span></button>
+  <button class="boost" id="bMoves">➕5 Moves <span id="nMoves">2</span></button>
+</div>
+<div id="controls">
+  <button id="btnHint">💡 Hint</button>
+  <button id="btnSound">🔊 Sound</button>
+  <button id="btnRestart">↻ Restart</button>
+  <button id="btnLevels">🗺️ Levels</button>
+  <button id="btnPause">⏸ Pause</button>
+  <button id="btnFull">⛶ Full</button>
+  <button id="btnShop">🛍️ Candy Shop</button>
+  <button id="btnDaily">🎁 Daily Reward</button>
+  <button id="btnExport">⬇ Export Save</button>
+  <button id="btnHelp">❓ Help</button>
+</div>
+
+<!-- Level select -->
+<div class="overlay" id="ovLevels"><div class="panel">
+  <h2>🗺️ Choose Level</h2>
+  <div style="font-size:13px;opacity:.9">Finish a level to unlock the next one. ⭐ = completed</div>
+  <div id="levelGrid"></div>
+  <br><button id="btnCloseLevels">▶ Play</button>
+</div></div>
+
+<!-- Result -->
+<div class="overlay" id="ovResult"><div class="panel">
+  <h2 id="resTitle">🎉 Level Complete!</h2>
+  <div id="resBody" style="font-size:15px;line-height:1.6"></div>
+  <br>
+  <button id="btnNext">▶ Next Level</button>
+  <button id="btnRetry">↻ Replay</button>
+  <button id="btnResLevels">🗺️ Levels</button>
+</div></div>
+
+<!-- Pause -->
+<div class="overlay" id="ovPause"><div class="panel">
+  <h2>⏸ Paused</h2>
+  <button id="btnResume">▶ Resume</button>
+  <button id="btnPauseRestart">↻ Restart</button>
+</div></div>
+
+<!-- Shop -->
+<div class="overlay" id="ovShop"><div class="panel">
+  <h2>🛍️ Candy Shop</h2>
+  <div id="shopCoins" style="font-weight:700"></div>
+  <div class="shopRow"><span>🔨 Lollipop Hammer ×1</span><button data-buy="hammer">50 🪙</button></div>
+  <div class="shopRow"><span>🔀 Shuffle ×1</span><button data-buy="shuffle">40 🪙</button></div>
+  <div class="shopRow"><span>↔️ Free Swap ×1</span><button data-buy="swap">60 🪙</button></div>
+  <div class="shopRow"><span>➕5 Moves ×1</span><button data-buy="moves">40 🪙</button></div>
+  <div style="font-size:12.5px;opacity:.85">Tip: bade matches (4–5 candies) se zyada coins milte hain!</div>
+  <br><button id="btnCloseShop">Close</button>
+</div></div>
+
+<!-- Help -->
+<div class="overlay" id="ovHelp"><div class="panel">
+  <h2>❓ How to Play</h2>
+  <div class="helpText">
+    <p>🍬 Ek candy ko tap karo, phir uske bagal wali candy ko tap karo — ya swipe/drag karo — dono swap ho jayengi.</p>
+    <p>🎯 Ek line me <b>3 ya zyada</b> same candies match karo to wo pop hongi aur score milega. Level ka score target moves khatam hone se pehle pura karo.</p>
+    <p>💥 <b>Match 4</b> = Striped Candy (poori row/column saaf)<br>
+    🎁 <b>L/T shape match</b> = Wrapped Candy (3×3 blast)<br>
+    🌈 <b>Match 5</b> = Colour Bomb (ek poora colour saaf)</p>
+    <p>⌨️ Keyboard: Arrows = cursor, Enter/Space = select/swap, WASD = swap, H = hint, P = pause.</p>
+  </div>
+  <button id="btnCloseHelp">Got it!</button>
+</div></div>
+
+<footer>
+  Candy Match Game — a free match-3 puzzle you can play right in your browser on mobile or PC. Progress saves automatically on this device.<br>
+  Made by Rajan Kumar 🍬
+</footer>
+
+<script>
+"use strict";
+const N=8, EMOJI=['🍒','🍊','🍋','🍏','🫐','🍇'];
+const $=id=>document.getElementById(id);
+let save=JSON.parse(localStorage.getItem('candyMatchSave')||'null')||{unlocked:1,done:{},coins:250,boost:{hammer:3,shuffle:2,swap:1,moves:2},lastDaily:'',sound:true};
+let level=1,board=[],score=0,moves=0,target=0,numColors=4,sel=null,busy=false,paused=false,streak=0,hammerArmed=false,freeSwapArmed=false,cursor={r:0,c:0},gameOver=false;
+function persist(){localStorage.setItem('candyMatchSave',JSON.stringify(save));}
+function levelCfg(lv){const colors=lv<=15?4:(lv<=50?5:6);const tgt=2500+lv*650;const mv=Math.max(14,26-Math.floor(lv/6));return{colors,tgt,mv};}
+function rnd(n){return Math.floor(Math.random()*n);}
+function newCandy(){return{t:rnd(numColors),sp:null};}
+function wouldMatch(b,r,c){const t=b[r][c].t;let n=1;for(let i=c-1;i>=0&&b[r][i].t===t;i--)n++;for(let i=c+1;i<N&&b[r][i].t===t;i++)n++;if(n>=3)return true;n=1;for(let i=r-1;i>=0&&b[i][c].t===t;i--)n++;for(let i=r+1;i<N&&b[i][c].t===t;i++)n++;return n>=3;}
+function genBoard(){let b;do{b=Array.from({length:N},()=>Array.from({length:N},newCandy));for(let r=0;r<N;r++)for(let c=0;c<N;c++){while(wouldMatch(b,r,c))b[r][c]=newCandy();}}while(!findMove(b));return b;}
+function findMatches(b){const mark=new Set();const runs=[];
+ for(let r=0;r<N;r++){let c=0;while(c<N){const t=b[r][c].t;let e=c;while(e+1<N&&b[r][e+1].t===t)e++;if(e-c+1>=3){const cells=[];for(let i=c;i<=e;i++){mark.add(r+','+i);cells.push([r,i]);}runs.push({cells,dir:'h',len:e-c+1});}c=e+1;}}
+ for(let c=0;c<N;c++){let r=0;while(r<N){const t=b[r][c].t;let e=r;while(e+1<N&&b[e+1][c].t===t)e++;if(e-r+1>=3){const cells=[];for(let i=r;i<=e;i++){mark.add(i+','+c);cells.push([i,c]);}runs.push({cells,dir:'v',len:e-r+1});}r=e+1;}}
+ return{mark,runs};}
+function findMove(b){for(let r=0;r<N;r++)for(let c=0;c<N;c++){for(const[dr,dc]of[[0,1],[1,0]]){const r2=r+dr,c2=c+dc;if(r2>=N||c2>=N)continue;const tmp=JSON.parse(JSON.stringify(b));[tmp[r][c],tmp[r2][c2]]=[tmp[r2][c2],tmp[r][c]];if(findMatches(tmp).mark.size)return[[r,c],[r2,c2]];}}return null;}
+let audioCtx=null;
+function beep(f,d,type){if(!save.sound)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(.12,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+(d||.09));o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+(d||.09));}catch(e){}}
+function render(){const bd=$('board');bd.innerHTML='';for(let r=0;r<N;r++)for(let c=0;c<N;c++){const cell=board[r][c];const d=document.createElement('div');d.className='cell c'+cell.t;d.dataset.r=r;d.dataset.c=c;d.textContent=EMOJI[cell.t];if(cell.sp){const s=document.createElement('span');s.className='badge';s.textContent=cell.sp==='bomb'?'🌈':cell.sp==='wrap'?'🎁':cell.sp==='row'?'↔️':'↕️';d.appendChild(s);}if(sel&&sel[0]===r&&sel[1]===c)d.classList.add('sel');if(cursor.r===r&&cursor.c===c)d.classList.add('cursor');d.addEventListener('pointerdown',ev=>{ev.preventDefault();onTap(r,c);});bd.appendChild(d);}
+ $('hudLevel').textContent='LEVEL '+level;$('hudMoves').textContent='MOVES '+moves;$('hudScore').textContent='SCORE '+score.toLocaleString('en-IN');$('hudCoins').textContent='🪙 '+save.coins;$('hudStreak').textContent='🔥 Streak '+streak;
+ $('progressBar').style.width=Math.min(100,score/target*100)+'%';$('progressText').textContent='🎯 Score '+score.toLocaleString('en-IN')+' / '+target.toLocaleString('en-IN');
+ $('nHammer').textContent=save.boost.hammer;$('nShuffle').textContent=save.boost.shuffle;$('nSwap').textContent=save.boost.swap;$('nMoves').textContent=save.boost.moves;
+ $('bHammer').classList.toggle('armed',hammerArmed);$('bSwap').classList.toggle('armed',freeSwapArmed);}
+function floatText(r,c,txt){const bd=$('board');const idx=r*N+c;const el=bd.children[idx];if(!el)return;const rect=el.getBoundingClientRect(),wrap=$('boardWrap').getBoundingClientRect();const s=document.createElement('div');s.className='floatScore';s.textContent=txt;s.style.left=(rect.left-wrap.left+rect.width/4)+'px';s.style.top=(rect.top-wrap.top)+'px';$('boardWrap').appendChild(s);setTimeout(()=>s.remove(),850);}
+function startLevel(lv){level=lv;const cfg=levelCfg(lv);numColors=cfg.colors;target=cfg.tgt;moves=cfg.mv;score=0;streak=0;sel=null;gameOver=false;paused=false;hammerArmed=false;freeSwapArmed=false;board=genBoard();render();}
+function swapCells(a,b){const t=board[a[0]][a[1]];board[a[0]][a[1]]=board[b[0]][b[1]];board[b[0]][b[1]]=t;}
+async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=findMatches(board);if(!mark.size)break;chain++;streak=Math.max(streak,chain);
+  // decide special creation from the longest run containing a swapped cell
+  let specialCell=null,specialType=null;
+  for(const run of runs){if(run.len>=5){specialType='bomb';specialCell=(swapped&&run.cells.some(x=>x[0]===swapped[0]&&x[1]===swapped[1]))?swapped:run.cells[2];break;}}
+  if(!specialType)for(const run of runs){if(run.len===4){specialType=run.dir==='h'?'row':'col';specialCell=(swapped&&run.cells.some(x=>x[0]===swapped[0]&&x[1]===swapped[1]))?swapped:run.cells[1];break;}}
+  if(!specialType){ // L/T intersection => wrapped
+    const counts={};mark.forEach(k=>counts[k]=(counts[k]||0)+1);
+    // a cell in both a h-run and v-run appears in mark once; detect via runs overlap
+    const seen={};for(const run of runs)for(const[r,c]of run.cells){const k=r+','+c;if(seen[k]){specialType='wrap';specialCell=[r,c];}seen[k]=true;}
+  }
+  // expand with specials already on board that are being cleared
+  const clear=new Set(mark);let grew=true;const queue=[...clear];
+  while(queue.length){const k=queue.pop();const[r,c]=k.split(',').map(Number);const sp=board[r][c].sp;if(!sp)continue;let extra=[];
+    if(sp==='row')for(let i=0;i<N;i++)extra.push(r+','+i);
+    if(sp==='col')for(let i=0;i<N;i++)extra.push(i+','+c);
+    if(sp==='wrap')for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const rr=r+dr,cc=c+dc;if(rr>=0&&rr<N&&cc>=0&&cc<N)extra.push(rr+','+cc);}
+    if(sp==='bomb'){const t=board[r][c].t;for(let i=0;i<N;i++)for(let j=0;j<N;j++)if(board[i][j].t===t)extra.push(i+','+j);}
+    for(const e of extra)if(!clear.has(e)){clear.add(e);queue.push(e);}}
+  const gained=clear.size*60*chain;score+=gained;save.coins+=Math.floor(clear.size/3);
+  const first=[...clear][0].split(',').map(Number);floatText(first[0],first[1],'+'+gained);beep(300+chain*90,.1,'triangle');
+  // pop animation
+  const specialT=specialCell?board[specialCell[0]][specialCell[1]].t:0;
+  const bd=$('board');clear.forEach(k=>{const[r,c]=k.split(',').map(Number);const el=bd.children[r*N+c];if(el)el.classList.add('pop');});
+  render();await wait(270);
+  clear.forEach(k=>{const[r,c]=k.split(',').map(Number);board[r][c]=null;});
+  if(specialCell&&specialType){const[sr,sc]=specialCell;board[sr][sc]={t:specialT||0,sp:specialType};}
+  // gravity + refill
+  for(let c=0;c<N;c++){const col=[];for(let r=N-1;r>=0;r--)if(board[r][c])col.push(board[r][c]);for(let r=N-1;r>=0;r--){board[r][c]=col[N-1-r]||newCandy();}}
+  render();await wait(130);swapped=null;}
+ persist();render();checkEnd();}
+function boardRunsType(runs,cell){for(const run of runs)if(run.cells.some(x=>x[0]===cell[0]&&x[1]===cell[1]))return board[cell[0]][cell[1]]?board[cell[0]][cell[1]].t:0;return 0;}
+function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+function checkEnd(){if(gameOver)return;if(score>=target&&moves>=0){gameOver=true;save.done[level]=true;if(level<100)save.unlocked=Math.max(save.unlocked,level+1);save.coins+=50+level*2;persist();$('resTitle').textContent='🎉 Level '+level+' Complete!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Bonus: +'+(50+level*2)+' 🪙 coins<br>Level '+(level+1<=100?(level+1)+' unlocked!':'— tumne saare 100 levels paar kar liye! 🏆');$('btnNext').style.display=level<100?'':'none';$('ovResult').classList.add('show');beep(660,.15);setTimeout(()=>beep(880,.2),160);}
+ else if(moves<=0){gameOver=true;$('resTitle').textContent='😢 Out of Moves!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Thoda sa reh gaya — ek baar phir try karo!';$('btnNext').style.display='none';$('ovResult').classList.add('show');beep(180,.25,'sawtooth');}}
+async function trySwap(a,b){if(busy||paused||gameOver)return;busy=true;const free=freeSwapArmed;swapCells(a,b);render();await wait(130);
+ if(freeSwapArmed){freeSwapArmed=false;save.boost.swap--;busy=false;persist();await resolveBoard(b);busy=false;render();return;}
+ // bomb direct swap: swapping a colour bomb with a candy clears that colour
+ const ca=board[a[0]][a[1]],cb=board[b[0]][b[1]];
+ if(ca.sp==='bomb'||cb.sp==='bomb'){const bombCell=ca.sp==='bomb'?a:b,other=ca.sp==='bomb'?board[b[0]][b[1]]:board[a[0]][a[1]];moves--;board[bombCell[0]][bombCell[1]]={t:other.t,sp:'bomb'};busy=false;await resolveBoard(null);busy=false;render();return;}
+ const{mark}=findMatches(board);
+ if(!mark.size){swapCells(a,b);beep(140,.08,'square');render();busy=false;return;}
+ moves--;await resolveBoard(b);busy=false;render();}
+function onTap(r,c){cursor={r,c};if(hammerArmed){if(save.boost.hammer>0&&!busy){save.boost.hammer--;hammerArmed=false;board[r][c]=null;for(let cc=0;cc<N;cc++){const col=[];for(let rr=N-1;rr>=0;rr--)if(board[rr][cc])col.push(board[rr][cc]);for(let rr=N-1;rr>=0;rr--)board[rr][cc]=col[N-1-rr]||newCandy();}score+=60;beep(240,.1);persist();resolveBoard(null);}render();return;}
+ if(!sel){sel=[r,c];beep(520,.05);render();return;}
+ const dr=Math.abs(sel[0]-r),dc=Math.abs(sel[1]-c);
+ if(dr+dc===1){const a=sel;sel=null;trySwap(a,[r,c]);}
+ else{sel=[r,c];render();}}
+// swipe / drag
+let dragStart=null;
+$('board').addEventListener('pointerdown',e=>{const cell=e.target.closest('.cell');if(cell)dragStart={r:+cell.dataset.r,c:+cell.dataset.c,x:e.clientX,y:e.clientY};});
+$('board').addEventListener('pointerup',e=>{if(!dragStart)return;const dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;if(Math.abs(dx)>24||Math.abs(dy)>24){const dr=Math.abs(dx)>Math.abs(dy)?0:Math.sign(dy),dc=Math.abs(dx)>Math.abs(dy)?Math.sign(dx):0;const r2=dragStart.r+dr,c2=dragStart.c+dc;sel=null;if(r2>=0&&r2<N&&c2>=0&&c2<N)trySwap([dragStart.r,dragStart.c],[r2,c2]);}dragStart=null;});
+// boosters
+$('bHammer').onclick=()=>{if(save.boost.hammer>0){hammerArmed=!hammerArmed;freeSwapArmed=false;render();}};
+$('bSwap').onclick=()=>{if(save.boost.swap>0){freeSwapArmed=!freeSwapArmed;hammerArmed=false;render();}};
+$('bShuffle').onclick=async()=>{if(save.boost.shuffle>0&&!busy){save.boost.shuffle--;busy=true;do{board=board.map(row=>row.map(cell=>({t:rnd(numColors),sp:cell.sp==='bomb'?'bomb':null})));for(let r=0;r<N;r++)for(let c=0;c<N;c++)while(wouldMatch(board,r,c))board[r][c].t=rnd(numColors);}while(!findMove(board));persist();render();await resolveBoard(null);busy=false;render();}};
+$('bMoves').onclick=()=>{if(save.boost.moves>0&&!gameOver){save.boost.moves--;moves+=5;persist();render();}};
+// controls
+$('btnHint').onclick=()=>{const mv=findMove(board);if(!mv)return;render();mv.forEach(([r,c])=>{const el=$('board').children[r*N+c];if(el)el.classList.add('hint');});beep(740,.07);};
+$('btnSound').onclick=e=>{save.sound=!save.sound;persist();e.target.textContent=save.sound?'🔊 Sound':'🔇 Muted';if(save.sound)beep(600,.07);};
+$('btnRestart').onclick=()=>startLevel(level);
+$('btnLevels').onclick=()=>{buildLevels();$('ovLevels').classList.add('show');};
+$('btnCloseLevels').onclick=()=>$('ovLevels').classList.remove('show');
+$('btnPause').onclick=()=>{paused=true;$('ovPause').classList.add('show');};
+$('btnResume').onclick=()=>{paused=false;$('ovPause').classList.remove('show');};
+$('btnPauseRestart').onclick=()=>{paused=false;$('ovPause').classList.remove('show');startLevel(level);};
+$('btnFull').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();};
+$('btnShop').onclick=()=>{$('shopCoins').textContent='Tumhare coins: 🪙 '+save.coins;$('ovShop').classList.add('show');};
+$('btnCloseShop').onclick=()=>$('ovShop').classList.remove('show');
+document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{const k=b.dataset.buy;const price={hammer:50,shuffle:40,swap:60,moves:40}[k];if(save.coins>=price){save.coins-=price;save.boost[k]++;persist();render();$('shopCoins').textContent='Tumhare coins: 🪙 '+save.coins;beep(700,.08);}else{alert('Coins kam hain! Bade matches banao, zyada coins kamao 🪙');}});
+$('btnDaily').onclick=()=>{const today=new Date().toDateString();if(save.lastDaily===today){alert('🎁 Aaj ka daily reward mil chuka hai. Kal phir aana!');return;}save.lastDaily=today;save.coins+=100;save.boost.hammer++;persist();render();alert('🎁 Daily Reward mila: +100 🪙 coins aur +1 🔨 Hammer!');};
+$('btnExport').onclick=()=>{const blob=new Blob([JSON.stringify(save,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='candy-match-save.json';a.click();URL.revokeObjectURL(a.href);};
+$('btnHelp').onclick=()=>$('ovHelp').classList.add('show');
+$('btnCloseHelp').onclick=()=>$('ovHelp').classList.remove('show');
+$('btnNext').onclick=()=>{$('ovResult').classList.remove('show');if(level<100)startLevel(level+1);};
+$('btnRetry').onclick=()=>{$('ovResult').classList.remove('show');startLevel(level);};
+$('btnResLevels').onclick=()=>{$('ovResult').classList.remove('show');buildLevels();$('ovLevels').classList.add('show');};
+function buildLevels(){const g=$('levelGrid');g.innerHTML='';for(let i=1;i<=100;i++){const b=document.createElement('button');b.textContent=(save.done[i]?'⭐ ':'')+i;if(i>save.unlocked)b.classList.add('locked');if(save.done[i])b.classList.add('done');b.disabled=i>save.unlocked;b.onclick=()=>{$('ovLevels').classList.remove('show');startLevel(i);};g.appendChild(b);}}
+document.addEventListener('keydown',e=>{if(paused&&e.key.toLowerCase()!=='p')return;const k=e.key.toLowerCase();
+ if(k==='h'){$('btnHint').click();return;} if(k==='p'){$('ovPause').classList.toggle('show');paused=!paused;return;}
+ if(k.startsWith('arrow')){e.preventDefault();if(k==='arrowup')cursor.r=Math.max(0,cursor.r-1);if(k==='arrowdown')cursor.r=Math.min(N-1,cursor.r+1);if(k==='arrowleft')cursor.c=Math.max(0,cursor.c-1);if(k==='arrowright')cursor.c=Math.min(N-1,cursor.c+1);render();return;}
+ if(k==='enter'||k===' '){e.preventDefault();onTap(cursor.r,cursor.c);return;}
+ const map={w:[-1,0],s:[1,0],a:[0,-1],d:[0,1]};if(map[k]){const r2=cursor.r+map[k][0],c2=cursor.c+map[k][1];if(r2>=0&&r2<N&&c2>=0&&c2<N){sel=null;trySwap([cursor.r,cursor.c],[r2,c2]);cursor={r:r2,c:c2};}}});
+$('btnSound').textContent=save.sound?'🔊 Sound':'🔇 Muted';
+startLevel(Math.min(save.unlocked,100));
+</script>
+</body>
+</html>
