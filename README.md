@@ -1,4 +1,4 @@
-# 🍬 Candy Match Game
+# 🍬 Candy Dhamaka — Free Candy Match 3 Game
 
 Play free online: https://usachaina7631-beep.github.io/candy-match-game/
 
