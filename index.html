@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#7b2ff7">
 <meta name="mobile-web-app-capable" content="yes">
@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <title>Candy Dhamaka — Free Candy Match 3 Game | Play Online, 100 Levels</title>
-<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) + v5: PWA installable app (manifest, service worker, install button) 2026-11-02 -->
+<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) + v5: PWA installable app (manifest, service worker, install button) 2026-11-02 + v6 majboot/smooth: crash-proof save (try/catch), error auto-unlock, no-select/no-callout, viewport-fit cover, vibration feedback -->
 <meta name="description" content="Play Candy Dhamaka, the free candy match game, online in your browser. Swap and match 3 or more candies, unlock striped candies, wrapped candies and colour bombs across 100 fun levels. No download needed — works on mobile and PC.">
 <meta name="keywords" content="candy match game, match 3 game, candy puzzle game online, free candy game, play candy match online">
 <meta name="robots" content="index, follow">
@@ -29,7 +29,7 @@
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:linear-gradient(160deg,#2b1055 0%,#7b2ff7 55%,#f107a3 130%);min-height:100vh;color:#fff;display:flex;flex-direction:column;align-items:center;padding:10px 8px 30px;user-select:none;overscroll-behavior:none}
+body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:linear-gradient(160deg,#2b1055 0%,#7b2ff7 55%,#f107a3 130%);min-height:100vh;color:#fff;display:flex;flex-direction:column;align-items:center;padding:10px 8px 30px;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:none;touch-action:manipulation}
 h1{font-size:clamp(22px,5vw,34px);margin:6px 0 2px;text-shadow:0 3px 0 rgba(0,0,0,.25);letter-spacing:.5px}
 .tagline{opacity:.9;font-size:13px;margin-bottom:10px;text-align:center}
 #hud{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:520px;width:100%;margin-bottom:8px}
@@ -175,9 +175,10 @@ footer{margin-top:16px;font-size:12px;opacity:.85;text-align:center;max-width:52
 "use strict";
 const N=8, EMOJI=['🍒','🍊','🍋','🍏','🫐','🍇'];
 const $=id=>document.getElementById(id);
-let save=JSON.parse(localStorage.getItem('candyMatchSave')||'null')||{unlocked:1,done:{},coins:250,boost:{hammer:3,shuffle:2,swap:1,moves:2},lastDaily:'',sound:true};
+let save;try{save=JSON.parse(localStorage.getItem('candyMatchSave')||'null');}catch(e){save=null;}
+save=save||{unlocked:1,done:{},coins:250,boost:{hammer:3,shuffle:2,swap:1,moves:2},lastDaily:'',sound:true};
 let level=1,board=[],score=0,moves=0,target=0,numColors=4,sel=null,busy=false,paused=false,streak=0,hammerArmed=false,freeSwapArmed=false,cursor={r:0,c:0},gameOver=false;
-function persist(){localStorage.setItem('candyMatchSave',JSON.stringify(save));}
+function persist(){try{localStorage.setItem('candyMatchSave',JSON.stringify(save));}catch(e){}}
 function levelCfg(lv){const colors=lv<=15?4:(lv<=50?5:6);const tgt=3000+lv*750;const mv=Math.max(13,24-Math.floor(lv/6));return{colors,tgt,mv};}
 function rnd(n){return Math.floor(Math.random()*n);}
 function newCandy(){return{t:rnd(numColors),sp:null};}
@@ -190,6 +191,8 @@ function findMatches(b){const mark=new Set();const runs=[];
 function findMove(b){for(let r=0;r<N;r++)for(let c=0;c<N;c++){for(const[dr,dc]of[[0,1],[1,0]]){const r2=r+dr,c2=c+dc;if(r2>=N||c2>=N)continue;const tmp=JSON.parse(JSON.stringify(b));[tmp[r][c],tmp[r2][c2]]=[tmp[r2][c2],tmp[r][c]];if(findMatches(tmp).mark.size)return[[r,c],[r2,c2]];}}return null;}
 let audioCtx=null;
 function beep(f,d,type){if(!save.sound)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(.12,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+(d||.09));o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+(d||.09));}catch(e){}}
+function buzz(ms){if(save.sound&&navigator.vibrate){try{navigator.vibrate(ms||12);}catch(e){}}}
+window.addEventListener('error',()=>{try{if(typeof busy!=='undefined'&&busy){busy=false;render();}}catch(e){}});
 function render(){const bd=$('board');bd.innerHTML='';for(let r=0;r<N;r++)for(let c=0;c<N;c++){const cell=board[r][c];const d=document.createElement('div');d.className='cell c'+cell.t;d.dataset.r=r;d.dataset.c=c;d.textContent=EMOJI[cell.t];if(cell.sp){const s=document.createElement('span');s.className='badge';s.textContent=cell.sp==='bomb'?'🌈':cell.sp==='wrap'?'🎁':cell.sp==='row'?'↔️':'↕️';d.appendChild(s);}if(sel&&sel[0]===r&&sel[1]===c)d.classList.add('sel');if(cursor.r===r&&cursor.c===c)d.classList.add('cursor');d.addEventListener('pointerdown',ev=>{ev.preventDefault();onTap(r,c);});bd.appendChild(d);}
  $('hudLevel').textContent='LEVEL '+level;$('hudMoves').textContent='MOVES '+moves;$('hudScore').textContent='SCORE '+score.toLocaleString('en-IN');$('hudCoins').textContent='🪙 '+save.coins;$('hudStreak').textContent='🔥 Streak '+streak;
  $('progressBar').style.width=Math.min(100,score/target*100)+'%';$('progressText').textContent='🎯 Score '+score.toLocaleString('en-IN')+' / '+target.toLocaleString('en-IN');
@@ -217,7 +220,7 @@ async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=fi
     if(sp==='bomb'){const t=board[r][c].t;for(let i=0;i<N;i++)for(let j=0;j<N;j++)if(board[i][j].t===t)extra.push(i+','+j);}
     for(const e of extra)if(!clear.has(e)){clear.add(e);queue.push(e);}}
   const gained=clear.size*60*Math.min(chain,3);score+=gained;save.coins+=Math.floor(clear.size/3);
-  const first=[...clear][0].split(',').map(Number);floatText(first[0],first[1],'+'+gained);beep(300+chain*90,.1,'triangle');
+  const first=[...clear][0].split(',').map(Number);floatText(first[0],first[1],'+'+gained);beep(300+chain*90,.1,'triangle');buzz(14);
   // pop animation
   const specialT=specialCell?board[specialCell[0]][specialCell[1]].t:0;
   const bd=$('board');clear.forEach(k=>{const[r,c]=k.split(',').map(Number);const el=bd.children[r*N+c];if(el)el.classList.add('pop');});
@@ -230,7 +233,7 @@ async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=fi
  persist();render();checkEnd();}
 function boardRunsType(runs,cell){for(const run of runs)if(run.cells.some(x=>x[0]===cell[0]&&x[1]===cell[1]))return board[cell[0]][cell[1]]?board[cell[0]][cell[1]].t:0;return 0;}
 function wait(ms){return new Promise(r=>setTimeout(r,ms));}
-function checkEnd(){if(gameOver)return;if(score>=target&&moves>=0){gameOver=true;save.done[level]=true;if(level<100)save.unlocked=Math.max(save.unlocked,level+1);save.coins+=50+level*2;persist();$('resTitle').textContent='🎉 Level '+level+' Complete!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Bonus: +'+(50+level*2)+' 🪙 coins<br>Level '+(level+1<=100?(level+1)+' unlocked!':'— tumne saare 100 levels paar kar liye! 🏆');$('btnNext').style.display=level<100?'':'none';$('ovResult').classList.add('show');beep(660,.15);setTimeout(()=>beep(880,.2),160);}
+function checkEnd(){if(gameOver)return;if(score>=target&&moves>=0){gameOver=true;save.done[level]=true;if(level<100)save.unlocked=Math.max(save.unlocked,level+1);save.coins+=50+level*2;persist();$('resTitle').textContent='🎉 Level '+level+' Complete!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Bonus: +'+(50+level*2)+' 🪙 coins<br>Level '+(level+1<=100?(level+1)+' unlocked!':'— tumne saare 100 levels paar kar liye! 🏆');$('btnNext').style.display=level<100?'':'none';$('ovResult').classList.add('show');beep(660,.15);setTimeout(()=>beep(880,.2),160);buzz([50,60,50,60,90]);}
  else if(moves<=0){gameOver=true;$('resTitle').textContent='😢 Out of Moves!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Thoda sa reh gaya — ek baar phir try karo!';$('btnNext').style.display='none';$('ovResult').classList.add('show');beep(180,.25,'sawtooth');}}
 async function trySwap(a,b){if(busy||paused||gameOver)return;busy=true;const free=freeSwapArmed;swapCells(a,b);render();await wait(110);
  if(freeSwapArmed){freeSwapArmed=false;save.boost.swap--;busy=false;persist();await resolveBoard(b);busy=false;render();return;}
