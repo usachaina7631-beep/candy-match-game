@@ -3,8 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#7b2ff7">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Candy Dhamaka">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <title>Candy Dhamaka — Free Candy Match 3 Game | Play Online, 100 Levels</title>
-<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) -->
+<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) + v5: PWA installable app (manifest, service worker, install button) 2026-11-02 -->
 <meta name="description" content="Play Candy Dhamaka, the free candy match game, online in your browser. Swap and match 3 or more candies, unlock striped candies, wrapped candies and colour bombs across 100 fun levels. No download needed — works on mobile and PC.">
 <meta name="keywords" content="candy match game, match 3 game, candy puzzle game online, free candy game, play candy match online">
 <meta name="robots" content="index, follow">
@@ -65,6 +73,7 @@ button.armed{background:linear-gradient(180deg,#ff5f6d,#ff2e63);color:#fff}
 .shopRow{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.1);border-radius:12px;padding:9px 12px;margin:7px 0;font-size:14px}
 .helpText{text-align:left;font-size:13.5px;line-height:1.55}
 #btnBigFull{width:min(520px,96vw);padding:14px;font-size:18px;border-radius:16px;background:linear-gradient(90deg,#ff8c42,#f107a3);color:#fff;letter-spacing:.4px;margin-bottom:10px;box-shadow:0 5px 0 rgba(0,0,0,.3)}
+#btnInstall{display:none;width:min(520px,96vw);padding:14px;font-size:18px;border-radius:16px;background:linear-gradient(90deg,#11998e,#38ef7d);color:#062b1e;letter-spacing:.4px;margin-bottom:10px;box-shadow:0 5px 0 rgba(0,0,0,.3);font-weight:800}
 footer{margin-top:16px;font-size:12px;opacity:.85;text-align:center;max-width:520px;line-height:1.6}
 </style>
 </head>
@@ -73,6 +82,7 @@ footer{margin-top:16px;font-size:12px;opacity:.85;text-align:center;max-width:52
 <div class="tagline">Candy Match 3 ka full dhamaka! Swap • Match • Blast — 100 levels, free, no download!</div>
 
 <button id="btnBigFull">⛶ FULL SCREEN ME KHELO</button>
+<button id="btnInstall">📲 APP INSTALL KARO — FREE</button>
 
 <div id="hud">
   <span class="chip" id="hudLevel">LEVEL 1</span>
@@ -255,6 +265,13 @@ $('btnResume').onclick=()=>{paused=false;$('ovPause').classList.remove('show');}
 $('btnPauseRestart').onclick=()=>{paused=false;$('ovPause').classList.remove('show');startLevel(level);};
 $('btnFull').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();};
 $('btnBigFull').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();};
+/* PWA install (v5) */
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('btnInstall').style.display='block';});
+if(/iphone|ipad|ipod/i.test(navigator.userAgent))$('btnInstall').style.display='block';
+window.addEventListener('appinstalled',()=>{$('btnInstall').style.display='none';});
+$('btnInstall').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();const ch=await deferredPrompt.userChoice;if(ch.outcome==='accepted')$('btnInstall').style.display='none';deferredPrompt=null;}else{alert('App install karne ke liye:\n\nAndroid (Chrome): upar ⋮ menu dabao → "App install karo" ya "Add to Home screen" chuno.\n\niPhone (Safari): Share button dabao → "Add to Home Screen" chuno.');}};
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
 $('btnShop').onclick=()=>{$('shopCoins').textContent='Tumhare coins: 🪙 '+save.coins;$('ovShop').classList.add('show');};
 $('btnCloseShop').onclick=()=>$('ovShop').classList.remove('show');
 document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{const k=b.dataset.buy;const price={hammer:50,shuffle:40,swap:60,moves:40}[k];if(save.coins>=price){save.coins-=price;save.boost[k]++;persist();render();$('shopCoins').textContent='Tumhare coins: 🪙 '+save.coins;beep(700,.08);}else{alert('Coins kam hain! Bade matches banao, zyada coins kamao 🪙');}});
