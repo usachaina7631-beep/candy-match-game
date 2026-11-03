@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <title>Candy Dhamaka — Free Candy Match 3 Game | Play Online, 100 Levels</title>
-<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) + v5: PWA installable app (manifest, service worker, install button) 2026-11-02 + v6 majboot/smooth: crash-proof save (try/catch), error auto-unlock, no-select/no-callout, viewport-fit cover, vibration feedback + v9 quality upgrade 2026-11-03 (after CrazyGames quality rejection): hand-drawn glossy SVG candies (no emoji on board), match spark particles, invalid-swap shake, rainbow colour bomb, Level-1 tip bar, bigger desktop layout (620px), gradient title + v10 smooth/strong 2026-11-03 (user: phone par pura fine nahi chal raha): persistent board DOM (cells built once, only changed cells re-render), drop-shadow filter and backdrop blur removed (GPU-heavy on low-end phones), fewer particles, snappier cascade timings + v11 'Candy-Crush-jaisa feel' 2026-11-03 (user ne Candy Crush ka video bhejkar kaha 'yesa hi banao, jitna code lage lagao'): ORIGINAL gradient jelly candies ek SVG sprite se (defs ek baar, har cell <use> — chamak zyada, bojh kam), halki neeli checker board + safed/halki theme, nayi candy girne par bounce (spawn), chain par badi 'Dhamaka! xN' text, jeet par confetti barish + v12 BUG FIX 2026-11-03 (khud khelkar pakda gaya): khali khane wala bug — phooti candy ki 'pop' class usi khane me wapas aayi same-type candy ko hamesha ke liye gayab kar deti thi; ab gravity se pehle pop class saaf hoti hai aur har level ki shuruaat par saare khane fresh bante hain. Confetti ab result window ke andar bhi girti hai (pehle dhundli parat ke peeche chhupti thi). Particles thode bade. Koi copy ki hui art/asset nahi — saari candy shapes khud banayi hui, sirf feel genre-jaisi. -->
+<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) + v5: PWA installable app (manifest, service worker, install button) 2026-11-02 + v6 majboot/smooth: crash-proof save (try/catch), error auto-unlock, no-select/no-callout, viewport-fit cover, vibration feedback + v9 quality upgrade 2026-11-03 (after CrazyGames quality rejection): hand-drawn glossy SVG candies (no emoji on board), match spark particles, invalid-swap shake, rainbow colour bomb, Level-1 tip bar, bigger desktop layout (620px), gradient title + v10 smooth/strong 2026-11-03 (user: phone par pura fine nahi chal raha): persistent board DOM (cells built once, only changed cells re-render), drop-shadow filter and backdrop blur removed (GPU-heavy on low-end phones), fewer particles, snappier cascade timings + v11 'Candy-Crush-jaisa feel' 2026-11-03 (user ne Candy Crush ka video bhejkar kaha 'yesa hi banao, jitna code lage lagao'): ORIGINAL gradient jelly candies ek SVG sprite se (defs ek baar, har cell <use> — chamak zyada, bojh kam), halki neeli checker board + safed/halki theme, nayi candy girne par bounce (spawn), chain par badi 'Dhamaka! xN' text, jeet par confetti barish + v12 BUG FIX 2026-11-03 (khud khelkar pakda gaya): khali khane wala bug — phooti candy ki 'pop' class usi khane me wapas aayi same-type candy ko hamesha ke liye gayab kar deti thi; ab gravity se pehle pop class saaf hoti hai aur har level ki shuruaat par saare khane fresh bante hain. Confetti ab result window ke andar bhi girti hai (pehle dhundli parat ke peeche chhupti thi). Particles thode bade + v13 Sweet-Quest features merge 2026-11-03 (user ne dusre AI ka 'Sweet Quest' game bhejkar kaha 'ye sab feature add kar do'): jo cheezein pehle se thi (100 levels, hint, shuffle, sound, progress, modal) wohi rahi; NAYA joda — (1) 🏆 Best Score chip (device par save, jeet/haar dono par update), (2) Message line (#msg): level start, match/cascade, galat swap, hint, dead-board par sandesh, (3) SABSE KAAM KA: dead-board par AUTO-SHUFFLE — pehle board atak sakta tha, ab move na mile to board khud shuffle hokar move wala banta hai. Sweet Quest ka emoji-design NAHI liya (wahi quality CrazyGames ne reject ki thi) + v14 screenshot-inspired 2026-11-03 (user ne ek bade match-3 game ka screenshot bheja): (1) progress bar par 3 sitare — score badhne par ek-ek karke sunehre jalte hain, (2) candies ke neeche gehri parat jodi — 3D jaisi gehrai/chamak aur badhi (art apni hi hai, copy nahi), (3) confetti do lehren me ~2.4 second tak girti hai (v12 ki jaanch me ek lehar screenshot se pehle khatm ho gayi thi, isliye dikhi nahi). Koi copy ki hui art/asset nahi — saari candy shapes khud banayi hui, sirf feel genre-jaisi. -->
 <meta name="description" content="Play Candy Dhamaka, the free candy match game, online in your browser. Swap and match 3 or more candies, unlock striped candies, wrapped candies and colour bombs across 100 fun levels. No download needed — works on mobile and PC.">
 <meta name="keywords" content="candy match game, match 3 game, candy puzzle game online, free candy game, play candy match online">
 <meta name="robots" content="index, follow">
@@ -34,6 +34,8 @@ h1{font-size:clamp(22px,5vw,34px);margin:6px 0 2px;text-shadow:0 3px 0 rgba(0,0,
 .tagline{opacity:.95;font-size:13px;margin-bottom:10px;text-align:center;color:#33507e;font-weight:600}
 #hud{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:520px;width:100%;margin-bottom:8px}
 .chip{background:#fff;border:none;box-shadow:0 2px 8px rgba(38,80,140,.18);border-radius:999px;padding:5px 11px;font-size:13px;font-weight:700;color:#33415c}
+.star{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:13px;color:#b9c8de;z-index:2;transition:all .25s;pointer-events:none}
+.star.on{color:#ffb703;transform:translate(-50%,-50%) scale(1.4);text-shadow:0 0 9px #ffd43b}
 #progressWrap{width:min(520px,96vw);background:rgba(255,255,255,.8);border-radius:999px;height:20px;position:relative;margin-bottom:10px;overflow:hidden;border:1px solid rgba(51,65,92,.18);box-shadow:inset 0 1px 3px rgba(38,80,140,.25)}
 #progressBar{height:100%;width:0%;background:linear-gradient(90deg,#ffd93d,#ff8c42);transition:width .3s}
 #progressText{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#33415c}
@@ -56,10 +58,11 @@ h1{font-size:clamp(22px,5vw,34px);margin:6px 0 2px;text-shadow:0 3px 0 rgba(0,0,
 @keyframes spawnIn{0%{transform:scale(.35)}55%{transform:scale(1.13)}100%{transform:scale(1)}}
 .bigTxt{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);font-size:32px;font-weight:900;color:#ff4785;text-shadow:0 2px 0 #fff,0 4px 0 #fff,0 8px 20px rgba(0,0,0,.3);z-index:7;pointer-events:none;white-space:nowrap;animation:bigPop .85s ease-out forwards}
 @keyframes bigPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}25%{opacity:1;transform:translate(-50%,-50%) scale(1.18)}55%{transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-74%) scale(1.02)}}
-.confetti{position:absolute;width:9px;height:14px;border-radius:2px;z-index:6;pointer-events:none;animation:confFall 1.15s ease-in forwards}
+.confetti{position:absolute;width:10px;height:16px;border-radius:2px;z-index:6;pointer-events:none;animation:confFall 1.7s ease-in forwards}
 @keyframes confFall{to{transform:translateY(430px) rotate(340deg);opacity:.15}}
 #board.shake{animation:shakeX .3s}
 @keyframes shakeX{20%{transform:translateX(-6px)}45%{transform:translateX(6px)}70%{transform:translateX(-4px)}90%{transform:translateX(3px)}}
+#msg{min-height:22px;text-align:center;font-weight:700;font-size:14px;color:#33507e;margin:0 0 6px}
 #tip{display:none;width:min(520px,96vw);background:#fff3bf;border:1px solid #ffd43b;color:#7a5200;box-shadow:0 3px 10px rgba(190,140,0,.18);border-radius:12px;padding:7px 12px;font-size:13.5px;text-align:center;margin-bottom:10px;font-weight:600}
 h1{background:linear-gradient(90deg,#ffe259,#ffa751,#ff5f9e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 0 rgba(0,0,0,.25))}
 @media (min-width:900px){
@@ -123,12 +126,12 @@ footer{margin-top:16px;font-size:12px;opacity:.9;text-align:center;max-width:520
 <radialGradient id="g3" cx="38%" cy="30%" r="82%"><stop offset="0%" stop-color="#d3f9a5"/><stop offset="45%" stop-color="#69db7c"/><stop offset="100%" stop-color="#2f9e44"/></radialGradient>
 <radialGradient id="g4" cx="38%" cy="30%" r="82%"><stop offset="0%" stop-color="#c5f6ff"/><stop offset="45%" stop-color="#4dabf7"/><stop offset="100%" stop-color="#1971c2"/></radialGradient>
 <radialGradient id="g5" cx="38%" cy="30%" r="82%"><stop offset="0%" stop-color="#f3c6ff"/><stop offset="45%" stop-color="#cc5de8"/><stop offset="100%" stop-color="#862e9c"/></radialGradient>
-<symbol id="cd0" viewBox="0 0 60 60"><ellipse cx="30" cy="31" rx="24" ry="17" fill="url(#g0)"/><ellipse cx="22" cy="23" rx="10" ry="4.6" fill="#ffffff" opacity=".65" transform="rotate(-18 22 23)"/></symbol>
-<symbol id="cd1" viewBox="0 0 60 60"><circle cx="30" cy="30" r="21" fill="url(#g1)"/><ellipse cx="23" cy="21" rx="9" ry="5" fill="#ffffff" opacity=".65" transform="rotate(-24 23 21)"/></symbol>
-<symbol id="cd2" viewBox="0 0 60 60"><path d="M30 5 C36 16 47 25 47 37 a17 17 0 1 1 -34 0 C13 25 24 16 30 5 Z" fill="url(#g2)"/><ellipse cx="24" cy="33" rx="6" ry="9" fill="#ffffff" opacity=".55" transform="rotate(-14 24 33)"/></symbol>
-<symbol id="cd3" viewBox="0 0 60 60"><ellipse cx="30" cy="30" rx="16.5" ry="23" fill="url(#g3)"/><ellipse cx="24" cy="20" rx="5" ry="10" fill="#ffffff" opacity=".55" transform="rotate(-12 24 20)"/></symbol>
-<symbol id="cd4" viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" rx="13" fill="url(#g4)"/><rect x="17" y="15" width="17" height="9" rx="4.5" fill="#ffffff" opacity=".6"/></symbol>
-<symbol id="cd5" viewBox="0 0 60 60"><circle cx="30" cy="30" r="21" fill="url(#g5)"/><path d="M30 16 a14 14 0 1 1 -14 14 a10.5 10.5 0 1 0 10.5 -10.5 a7 7 0 1 1 -7 7" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" opacity=".5"/><ellipse cx="23" cy="20" rx="8" ry="4.4" fill="#ffffff" opacity=".6" transform="rotate(-24 23 20)"/></symbol>
+<symbol id="cd0" viewBox="0 0 60 60"><ellipse cx="30" cy="31" rx="24" ry="17" fill="url(#g0)"/><ellipse cx="30" cy="41" rx="16" ry="4.6" fill="#7a0d12" opacity=".16"/><ellipse cx="22" cy="23" rx="10" ry="4.6" fill="#ffffff" opacity=".65" transform="rotate(-18 22 23)"/></symbol>
+<symbol id="cd1" viewBox="0 0 60 60"><circle cx="30" cy="30" r="21" fill="url(#g1)"/><ellipse cx="30" cy="42" rx="13.5" ry="4.4" fill="#8a4a00" opacity=".16"/><ellipse cx="23" cy="21" rx="9" ry="5" fill="#ffffff" opacity=".65" transform="rotate(-24 23 21)"/></symbol>
+<symbol id="cd2" viewBox="0 0 60 60"><path d="M30 5 C36 16 47 25 47 37 a17 17 0 1 1 -34 0 C13 25 24 16 30 5 Z" fill="url(#g2)"/><ellipse cx="30" cy="43" rx="10.5" ry="3.8" fill="#8a6d00" opacity=".16"/><ellipse cx="24" cy="33" rx="6" ry="9" fill="#ffffff" opacity=".55" transform="rotate(-14 24 33)"/></symbol>
+<symbol id="cd3" viewBox="0 0 60 60"><ellipse cx="30" cy="30" rx="16.5" ry="23" fill="url(#g3)"/><ellipse cx="30" cy="45" rx="9.5" ry="3.8" fill="#14532d" opacity=".16"/><ellipse cx="24" cy="20" rx="5" ry="10" fill="#ffffff" opacity=".55" transform="rotate(-12 24 20)"/></symbol>
+<symbol id="cd4" viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" rx="13" fill="url(#g4)"/><rect x="17" y="40" width="26" height="6" rx="3" fill="#0b3d66" opacity=".15"/><rect x="17" y="15" width="17" height="9" rx="4.5" fill="#ffffff" opacity=".6"/></symbol>
+<symbol id="cd5" viewBox="0 0 60 60"><circle cx="30" cy="30" r="21" fill="url(#g5)"/><ellipse cx="30" cy="42" rx="13.5" ry="4.4" fill="#4a1160" opacity=".16"/><path d="M30 16 a14 14 0 1 1 -14 14 a10.5 10.5 0 1 0 10.5 -10.5 a7 7 0 1 1 -7 7" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" opacity=".5"/><ellipse cx="23" cy="20" rx="8" ry="4.4" fill="#ffffff" opacity=".6" transform="rotate(-24 23 20)"/></symbol>
 </defs></svg>
 <h1>🍬 Candy Dhamaka</h1>
 <div class="tagline">Candy Match 3 ka full dhamaka! Swap • Match • Blast — 100 levels, free, no download!</div>
@@ -140,11 +143,13 @@ footer{margin-top:16px;font-size:12px;opacity:.9;text-align:center;max-width:520
   <span class="chip" id="hudLevel">LEVEL 1</span>
   <span class="chip" id="hudMoves">MOVES 22</span>
   <span class="chip" id="hudScore">SCORE 0</span>
+ <span class="chip" id="hudBest">🏆 Best 0</span>
   <span class="chip">❤️❤️❤️❤️❤️ FULL</span>
   <span class="chip" id="hudCoins">🪙 250</span>
   <span class="chip" id="hudStreak">🔥 Streak 0</span>
 </div>
-<div id="progressWrap"><div id="progressBar"></div><div id="progressText">🎯 Score 0 / 3,000</div></div>
+<div id="progressWrap"><div id="progressBar"></div><span class="star" id="star1" style="left:33%">★</span><span class="star" id="star2" style="left:66%">★</span><span class="star" id="star3" style="left:97%">★</span><div id="progressText">🎯 Score 0 / 3,000</div></div>
+<div id="msg">3 ya zyada candies match karo! 🍬</div>
 <div id="tip">👆 Pehla kadam: koi candy tap karo, phir uske bagal wali candy tap karo — 3 same candies match karke phodo!</div>
 
 <div id="boardWrap"><div id="board"></div></div>
@@ -239,7 +244,7 @@ const CANDY_SVG=[0,1,2,3,4,5].map(i=>'<svg viewBox="0 0 60 60" aria-hidden="true
 const PCOLORS=['#ff5b74','#ffa02e','#ffd93d','#52e06a','#57a7ff','#c77dff'];
 const $=id=>document.getElementById(id);
 let save;try{save=JSON.parse(localStorage.getItem('candyMatchSave')||'null');}catch(e){save=null;}
-save=save||{unlocked:1,done:{},coins:250,boost:{hammer:3,shuffle:2,swap:1,moves:2},lastDaily:'',sound:true};
+save=save||{unlocked:1,done:{},coins:250,boost:{hammer:3,shuffle:2,swap:1,moves:2},lastDaily:'',sound:true,best:0};if(save.best===undefined)save.best=0;
 let level=1,board=[],score=0,moves=0,target=0,numColors=4,sel=null,busy=false,paused=false,streak=0,hammerArmed=false,freeSwapArmed=false,cursor={r:0,c:0},gameOver=false;
 function persist(){try{localStorage.setItem('candyMatchSave',JSON.stringify(save));}catch(e){}}
 function levelCfg(lv){const colors=lv<=15?4:(lv<=50?5:6);const tgt=3000+lv*750;const mv=Math.max(13,24-Math.floor(lv/6));return{colors,tgt,mv};}
@@ -266,15 +271,17 @@ function render(){if(!cellEls.length)buildBoardDOM();for(let r=0;r<N;r++)for(let
    if(cell.sp==='row'||cell.sp==='col'){const st=document.createElement('span');st.className='stripes '+(cell.sp==='row'?'srow':'scol');d.appendChild(st);const s=document.createElement('span');s.className='badge';s.textContent=cell.sp==='row'?'↔':'↕';d.appendChild(s);}
    else if(cell.sp==='wrap'){const s=document.createElement('span');s.className='badge';s.textContent='✦';s.style.color='#ffe066';s.style.fontSize='.85em';d.appendChild(s);}}}
  d.classList.remove('hint');d.classList.toggle('sel',!!(sel&&sel[0]===r&&sel[1]===c));d.classList.toggle('cursor',cursor.r===r&&cursor.c===c);}
- $('hudLevel').textContent='LEVEL '+level;$('hudMoves').textContent='MOVES '+moves;$('hudScore').textContent='SCORE '+score.toLocaleString('en-IN');$('hudCoins').textContent='🪙 '+save.coins;$('hudStreak').textContent='🔥 Streak '+streak;
- $('progressBar').style.width=Math.min(100,score/target*100)+'%';$('progressText').textContent='🎯 Score '+score.toLocaleString('en-IN')+' / '+target.toLocaleString('en-IN');
+ $('hudLevel').textContent='LEVEL '+level;$('hudMoves').textContent='MOVES '+moves;$('hudScore').textContent='SCORE '+score.toLocaleString('en-IN');$('hudBest').textContent='🏆 Best '+(save.best||0).toLocaleString('en-IN');$('hudCoins').textContent='🪙 '+save.coins;$('hudStreak').textContent='🔥 Streak '+streak;
+ $('progressBar').style.width=Math.min(100,score/target*100)+'%';$('progressText').textContent='🎯 Score '+score.toLocaleString('en-IN')+' / '+target.toLocaleString('en-IN');const pc=target?score/target:0;['star1','star2','star3'].forEach((id,i)=>{const el=$(id);if(el)el.classList.toggle('on',pc>=(i+1)/3);});
  $('nHammer').textContent=save.boost.hammer;$('nShuffle').textContent=save.boost.shuffle;$('nSwap').textContent=save.boost.swap;$('nMoves').textContent=save.boost.moves;
  $('bHammer').classList.toggle('armed',hammerArmed);$('bSwap').classList.toggle('armed',freeSwapArmed);}
+function setMsg(t){const m=$('msg');if(m)m.textContent=t;}
+function reshuffle(){for(let tries=0;tries<60;tries++){const flat=[];board.forEach(row=>row.forEach(cell=>flat.push(cell)));for(let i=flat.length-1;i>0;i--){const j=rnd(i+1);const tmp=flat[i];flat[i]=flat[j];flat[j]=tmp;}let k=0;board.forEach(row=>row.forEach((cell,ci)=>{row[ci]=flat[k++];}));if(!findMatches(board).mark.size&&findMove(board))break;}}
 function bigText(txt){const d=document.createElement('div');d.className='bigTxt';d.textContent=txt;$('boardWrap').appendChild(d);setTimeout(()=>d.remove(),880);}
-function confetti(){const cols=['#ff5a4e','#ff9f2e','#ffd93b','#69db7c','#4dabf7','#cc5de8'];for(const wrap of[$('boardWrap'),$('ovResult')]){if(!wrap)continue;for(let i=0;i<16;i++){const s=document.createElement('span');s.className='confetti';s.style.left=(4+Math.random()*92)+'%';s.style.top='-14px';s.style.background=cols[i%6];s.style.animationDelay=(Math.random()*0.25)+'s';wrap.appendChild(s);setTimeout(()=>s.remove(),1700);}}}
+function confetti(){const cols=['#ff5a4e','#ff9f2e','#ffd93b','#69db7c','#4dabf7','#cc5de8'];const wave=()=>{for(const wrap of[$('boardWrap'),$('ovResult')]){if(!wrap)continue;for(let i=0;i<16;i++){const s=document.createElement('span');s.className='confetti';s.style.left=(4+Math.random()*92)+'%';s.style.top='-16px';s.style.background=cols[i%6];s.style.animationDelay=(Math.random()*0.2)+'s';wrap.appendChild(s);setTimeout(()=>s.remove(),2500);}}};wave();setTimeout(wave,700);}
 function floatText(r,c,txt){const bd=$('board');const idx=r*N+c;const el=bd.children[idx];if(!el)return;const rect=el.getBoundingClientRect(),wrap=$('boardWrap').getBoundingClientRect();const s=document.createElement('div');s.className='floatScore';s.textContent=txt;s.style.left=(rect.left-wrap.left+rect.width/4)+'px';s.style.top=(rect.top-wrap.top)+'px';$('boardWrap').appendChild(s);setTimeout(()=>s.remove(),850);}
 function spawnSparks(r,c,t){const bd=$('board');const el=bd.children[r*N+c];if(!el)return;const rect=el.getBoundingClientRect(),wrap=$('boardWrap').getBoundingClientRect();const cx=rect.left-wrap.left+rect.width/2-4,cy=rect.top-wrap.top+rect.height/2-4;for(let i=0;i<5;i++){const s=document.createElement('span');s.className='spark';const ang=Math.random()*Math.PI*2,dist=20+Math.random()*22;s.style.setProperty('--dx',Math.cos(ang)*dist+'px');s.style.setProperty('--dy',Math.sin(ang)*dist+'px');s.style.left=cx+'px';s.style.top=cy+'px';s.style.background=PCOLORS[t]||'#ffe066';s.style.boxShadow='0 0 6px '+(PCOLORS[t]||'#ffe066');$('boardWrap').appendChild(s);setTimeout(()=>s.remove(),600);}}
-function startLevel(lv){level=lv;const cfg=levelCfg(lv);numColors=cfg.colors;target=cfg.tgt;moves=cfg.mv;score=0;streak=0;sel=null;gameOver=false;paused=false;hammerArmed=false;freeSwapArmed=false;board=genBoard();cellEls.forEach(row=>row.forEach(d=>delete d.dataset.sig));render();$('tip').style.display=lv===1?'block':'none';}
+function startLevel(lv){level=lv;const cfg=levelCfg(lv);numColors=cfg.colors;target=cfg.tgt;moves=cfg.mv;score=0;streak=0;sel=null;gameOver=false;paused=false;hammerArmed=false;freeSwapArmed=false;board=genBoard();cellEls.forEach(row=>row.forEach(d=>delete d.dataset.sig));render();$('tip').style.display=lv===1?'block':'none';setMsg('🎯 Level '+lv+' — target '+cfg.tgt.toLocaleString('en-IN')+' points!');}
 function swapCells(a,b){const t=board[a[0]][a[1]];board[a[0]][a[1]]=board[b[0]][b[1]];board[b[0]][b[1]]=t;}
 async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=findMatches(board);if(!mark.size)break;chain++;streak=Math.max(streak,chain);
   // decide special creation from the longest run containing a swapped cell
@@ -296,7 +303,7 @@ async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=fi
     for(const e of extra)if(!clear.has(e)){clear.add(e);queue.push(e);}}
   const gained=clear.size*60*Math.min(chain,3);score+=gained;save.coins+=Math.floor(clear.size/3);
   [...clear].slice(0,10).forEach(k=>{const[r,c]=k.split(',').map(Number);spawnSparks(r,c,board[r][c].t);});
-  const first=[...clear][0].split(',').map(Number);floatText(first[0],first[1],'+'+gained);if(chain>=2)bigText('Dhamaka! x'+chain);beep(300+chain*90,.1,'triangle');buzz(14);
+  const first=[...clear][0].split(',').map(Number);floatText(first[0],first[1],'+'+gained);if(chain>=2)bigText('Dhamaka! x'+chain);setMsg(chain>=2?('🔥 Cascade x'+chain+' — kamaal!'):'🍬 Badhiya match!');beep(300+chain*90,.1,'triangle');buzz(14);
   // pop animation
   const specialT=specialCell?board[specialCell[0]][specialCell[1]].t:0;
   const bd=$('board');clear.forEach(k=>{const[r,c]=k.split(',').map(Number);const el=bd.children[r*N+c];if(el)el.classList.add('pop');});
@@ -310,16 +317,16 @@ async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=fi
  persist();render();checkEnd();}
 function boardRunsType(runs,cell){for(const run of runs)if(run.cells.some(x=>x[0]===cell[0]&&x[1]===cell[1]))return board[cell[0]][cell[1]]?board[cell[0]][cell[1]].t:0;return 0;}
 function wait(ms){return new Promise(r=>setTimeout(r,ms));}
-function checkEnd(){if(gameOver)return;if(score>=target&&moves>=0){gameOver=true;save.done[level]=true;confetti();if(level<100)save.unlocked=Math.max(save.unlocked,level+1);save.coins+=50+level*2;persist();$('resTitle').textContent='🎉 Level '+level+' Complete!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Bonus: +'+(50+level*2)+' 🪙 coins<br>Level '+(level+1<=100?(level+1)+' unlocked!':'— tumne saare 100 levels paar kar liye! 🏆');$('btnNext').style.display=level<100?'':'none';$('ovResult').classList.add('show');beep(660,.15);setTimeout(()=>beep(880,.2),160);buzz([50,60,50,60,90]);}
- else if(moves<=0){gameOver=true;$('resTitle').textContent='😢 Out of Moves!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Thoda sa reh gaya — ek baar phir try karo!';$('btnNext').style.display='none';$('ovResult').classList.add('show');beep(180,.25,'sawtooth');}}
+function checkEnd(){if(gameOver)return;if(score>=target&&moves>=0){gameOver=true;save.done[level]=true;if(score>save.best)save.best=score;confetti();if(level<100)save.unlocked=Math.max(save.unlocked,level+1);save.coins+=50+level*2;persist();$('resTitle').textContent='🎉 Level '+level+' Complete!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Bonus: +'+(50+level*2)+' 🪙 coins<br>Level '+(level+1<=100?(level+1)+' unlocked!':'— tumne saare 100 levels paar kar liye! 🏆');$('btnNext').style.display=level<100?'':'none';$('ovResult').classList.add('show');beep(660,.15);setTimeout(()=>beep(880,.2),160);buzz([50,60,50,60,90]);}
+ else if(moves<=0){gameOver=true;if(score>save.best)save.best=score;persist();$('resTitle').textContent='😢 Out of Moves!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Thoda sa reh gaya — ek baar phir try karo!';$('btnNext').style.display='none';$('ovResult').classList.add('show');beep(180,.25,'sawtooth');}}
 async function trySwap(a,b){if(busy||paused||gameOver)return;busy=true;const free=freeSwapArmed;swapCells(a,b);render();await wait(110);
  if(freeSwapArmed){freeSwapArmed=false;save.boost.swap--;busy=false;persist();await resolveBoard(b);busy=false;render();return;}
  // bomb direct swap: swapping a colour bomb with a candy clears that colour
  const ca=board[a[0]][a[1]],cb=board[b[0]][b[1]];
  if(ca.sp==='bomb'||cb.sp==='bomb'){const bombCell=ca.sp==='bomb'?a:b,other=ca.sp==='bomb'?board[b[0]][b[1]]:board[a[0]][a[1]];moves--;board[bombCell[0]][bombCell[1]]={t:other.t,sp:'bomb'};busy=false;await resolveBoard(null);busy=false;render();return;}
  const{mark}=findMatches(board);
- if(!mark.size){swapCells(a,b);beep(140,.08,'square');$('board').classList.add('shake');setTimeout(()=>$('board').classList.remove('shake'),320);render();busy=false;return;}
- moves--;await resolveBoard(b);busy=false;render();}
+ if(!mark.size){swapCells(a,b);beep(140,.08,'square');$('board').classList.add('shake');setTimeout(()=>$('board').classList.remove('shake'),320);setMsg('Match nahi bana — dusri candy try karo!');render();busy=false;return;}
+ moves--;await resolveBoard(b);if(!gameOver&&!findMove(board)){setMsg('Koi move nahi bacha — board shuffle ho raha hai! 🔀');reshuffle();render();await wait(150);}busy=false;render();}
 function onTap(r,c){cursor={r,c};if(hammerArmed){if(save.boost.hammer>0&&!busy){save.boost.hammer--;hammerArmed=false;board[r][c]=null;for(let cc=0;cc<N;cc++){const col=[];for(let rr=N-1;rr>=0;rr--)if(board[rr][cc])col.push(board[rr][cc]);for(let rr=N-1;rr>=0;rr--)board[rr][cc]=col[N-1-rr]||newCandy();}score+=60;beep(240,.1);persist();resolveBoard(null);}render();return;}
  if(!sel){sel=[r,c];beep(520,.05);render();return;}
  const dr=Math.abs(sel[0]-r),dc=Math.abs(sel[1]-c);
@@ -335,7 +342,7 @@ $('bSwap').onclick=()=>{if(save.boost.swap>0){freeSwapArmed=!freeSwapArmed;hamme
 $('bShuffle').onclick=async()=>{if(save.boost.shuffle>0&&!busy){save.boost.shuffle--;busy=true;do{board=board.map(row=>row.map(cell=>({t:rnd(numColors),sp:cell.sp==='bomb'?'bomb':null})));for(let r=0;r<N;r++)for(let c=0;c<N;c++)while(wouldMatch(board,r,c))board[r][c].t=rnd(numColors);}while(!findMove(board));persist();render();await resolveBoard(null);busy=false;render();}};
 $('bMoves').onclick=()=>{if(save.boost.moves>0&&!gameOver){save.boost.moves--;moves+=5;persist();render();}};
 // controls
-$('btnHint').onclick=()=>{const mv=findMove(board);if(!mv)return;render();mv.forEach(([r,c])=>{const el=$('board').children[r*N+c];if(el)el.classList.add('hint');});beep(740,.07);};
+$('btnHint').onclick=()=>{const mv=findMove(board);if(!mv)return;render();mv.forEach(([r,c])=>{const el=$('board').children[r*N+c];if(el)el.classList.add('hint');});setMsg('💡 Chamkile khane swap karo!');beep(740,.07);};
 $('btnSound').onclick=e=>{save.sound=!save.sound;persist();e.target.textContent=save.sound?'🔊 Sound':'🔇 Muted';if(save.sound)beep(600,.07);};
 $('btnRestart').onclick=()=>startLevel(level);
 $('btnLevels').onclick=()=>{buildLevels();$('ovLevels').classList.add('show');};
