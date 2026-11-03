@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <title>Candy Dhamaka — Free Candy Match 3 Game | Play Online, 100 Levels</title>
-<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) + v5: PWA installable app (manifest, service worker, install button) 2026-11-02 + v6 majboot/smooth: crash-proof save (try/catch), error auto-unlock, no-select/no-callout, viewport-fit cover, vibration feedback -->
+<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) + v5: PWA installable app (manifest, service worker, install button) 2026-11-02 + v6 majboot/smooth: crash-proof save (try/catch), error auto-unlock, no-select/no-callout, viewport-fit cover, vibration feedback + v9 quality upgrade 2026-11-03 (after CrazyGames quality rejection): hand-drawn glossy SVG candies (no emoji on board), match spark particles, invalid-swap shake, rainbow colour bomb, Level-1 tip bar, bigger desktop layout (620px), gradient title -->
 <meta name="description" content="Play Candy Dhamaka, the free candy match game, online in your browser. Swap and match 3 or more candies, unlock striped candies, wrapped candies and colour bombs across 100 fun levels. No download needed — works on mobile and PC.">
 <meta name="keywords" content="candy match game, match 3 game, candy puzzle game online, free candy game, play candy match online">
 <meta name="robots" content="index, follow">
@@ -39,7 +39,32 @@ h1{font-size:clamp(22px,5vw,34px);margin:6px 0 2px;text-shadow:0 3px 0 rgba(0,0,
 #progressText{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;text-shadow:0 1px 2px #000}
 #boardWrap{position:relative;width:min(520px,96vw)}
 #board{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;background:rgba(0,0,0,.28);padding:8px;border-radius:18px;border:2px solid rgba(255,255,255,.22);box-shadow:0 12px 30px rgba(0,0,0,.35);touch-action:none}
-.cell{aspect-ratio:1;border-radius:22%;display:flex;align-items:center;justify-content:center;font-size:clamp(20px,6.4vw,34px);cursor:pointer;position:relative;transition:transform .15s ease, box-shadow .15s ease;border:2px solid rgba(255,255,255,.15)}
+.cell{aspect-ratio:1;border-radius:22%;display:flex;align-items:center;justify-content:center;font-size:clamp(20px,6.4vw,34px);cursor:pointer;position:relative;transition:transform .15s ease, box-shadow .15s ease;border:2px solid rgba(255,255,255,.15);box-shadow:inset 0 -7px 11px rgba(0,0,0,.20),inset 0 5px 7px rgba(255,255,255,.35)}
+.cell::before{content:'';position:absolute;left:11%;top:6%;width:44%;height:27%;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,.55),rgba(255,255,255,0) 70%);pointer-events:none;z-index:3}
+.cell svg{width:84%;height:84%;position:relative;z-index:1;filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}
+.cell .stripes{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2}
+.cell .stripes.srow{background:repeating-linear-gradient(0deg,rgba(255,255,255,.6) 0 5px,transparent 5px 13px)}
+.cell .stripes.scol{background:repeating-linear-gradient(90deg,rgba(255,255,255,.6) 0 5px,transparent 5px 13px)}
+.cell.bombcell{background:radial-gradient(circle at 35% 30%,#3a3a55,#14142b)!important}
+.bombCore{width:80%;height:80%;border-radius:50%;background:conic-gradient(#ff5b5b,#ffb84d,#ffe94d,#6be36b,#4dc3ff,#b06bff,#ff5b5b);box-shadow:inset 0 -6px 9px rgba(0,0,0,.35),inset 0 5px 7px rgba(255,255,255,.65);position:relative;z-index:1;animation:bombSpin 3.5s linear infinite}
+@keyframes bombSpin{to{transform:rotate(360deg)}}
+.cell .badge{z-index:4}
+.spark{position:absolute;width:9px;height:9px;border-radius:50%;pointer-events:none;z-index:6;animation:sparkFly .55s ease-out forwards}
+@keyframes sparkFly{to{transform:translate(var(--dx),var(--dy)) scale(.15);opacity:0}}
+#board.shake{animation:shakeX .3s}
+@keyframes shakeX{20%{transform:translateX(-6px)}45%{transform:translateX(6px)}70%{transform:translateX(-4px)}90%{transform:translateX(3px)}}
+#tip{display:none;width:min(520px,96vw);background:rgba(255,224,102,.16);border:1px solid rgba(255,224,102,.55);color:#ffe9a8;border-radius:12px;padding:7px 12px;font-size:13.5px;text-align:center;margin-bottom:10px}
+h1{background:linear-gradient(90deg,#ffe259,#ffa751,#ff5f9e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 0 rgba(0,0,0,.25))}
+@media (min-width:900px){
+ #boardWrap{width:min(620px,96vw)}
+ #progressWrap,#tip{width:min(620px,96vw)}
+ #btnBigFull,#btnInstall,#promo{width:min(620px,96vw)}
+ #hud{max-width:620px}
+ #controls,#boosters{max-width:620px}
+ footer{max-width:620px}
+ .chip{font-size:14px;padding:6px 14px}
+ h1{font-size:42px}
+}
 .cell:active{transform:scale(.92)}
 .cell.c0{background:radial-gradient(circle at 32% 30%,#ff8fa3,#e63950)}
 .cell.c1{background:radial-gradient(circle at 32% 30%,#ffc46b,#f08c00)}
@@ -99,6 +124,7 @@ footer{margin-top:16px;font-size:12px;opacity:.85;text-align:center;max-width:52
   <span class="chip" id="hudStreak">🔥 Streak 0</span>
 </div>
 <div id="progressWrap"><div id="progressBar"></div><div id="progressText">🎯 Score 0 / 3,000</div></div>
+<div id="tip">👆 Pehla kadam: koi candy tap karo, phir uske bagal wali candy tap karo — 3 same candies match karke phodo!</div>
 
 <div id="boardWrap"><div id="board"></div></div>
 
@@ -164,9 +190,9 @@ footer{margin-top:16px;font-size:12px;opacity:.85;text-align:center;max-width:52
   <div class="helpText">
     <p>🍬 Ek candy ko tap karo, phir uske bagal wali candy ko tap karo — ya swipe/drag karo — dono swap ho jayengi.</p>
     <p>🎯 Ek line me <b>3 ya zyada</b> same candies match karo to wo pop hongi aur score milega. Level ka score target moves khatam hone se pehle pura karo.</p>
-    <p>💥 <b>Match 4</b> = Striped Candy (poori row/column saaf)<br>
-    🎁 <b>L/T shape match</b> = Wrapped Candy (3×3 blast)<br>
-    🌈 <b>Match 5</b> = Colour Bomb (ek poora colour saaf)</p>
+    <p>💥 <b>Match 4</b> = Striped Candy (safed dhariyan — poori row/column saaf)<br>
+    🎁 <b>L/T shape match</b> = Wrapped Candy (sunehra ✦ nishan — 3×3 blast)<br>
+    🌈 <b>Match 5</b> = Colour Bomb (ghumti hui rainbow goli — ek poora colour saaf)</p>
     <p>⌨️ Keyboard: Arrows = cursor, Enter/Space = select/swap, WASD = swap, H = hint, P = pause.</p>
   </div>
   <button id="btnCloseHelp">Got it!</button>
@@ -186,7 +212,17 @@ footer{margin-top:16px;font-size:12px;opacity:.85;text-align:center;max-width:52
 
 <script>
 "use strict";
-const N=8, EMOJI=['🍒','🍊','🍋','🍏','🫐','🍇'];
+const N=8;
+/* v9 quality: hand-drawn glossy candy artwork (SVG) — no emoji candies on the board */
+const CANDY_SVG=[
+'<svg viewBox="0 0 48 48"><path d="M25 5 C29 12 31 17 33 23" stroke="#2e7d32" stroke-width="3.5" fill="none" stroke-linecap="round"/><ellipse cx="31" cy="8" rx="7" ry="4" fill="#43c465" transform="rotate(-24 31 8)"/><circle cx="16" cy="33" r="10.5" fill="#ff3b57"/><circle cx="33" cy="35" r="9" fill="#e62645"/><ellipse cx="12.5" cy="28.5" rx="3.6" ry="2.4" fill="#fff" opacity=".55" transform="rotate(-30 12.5 28.5)"/><ellipse cx="30" cy="31" rx="3" ry="2" fill="#fff" opacity=".5" transform="rotate(-30 30 31)"/></svg>',
+'<svg viewBox="0 0 48 48"><circle cx="24" cy="27" r="16" fill="#ff9f1c"/><path d="M24 12 C25 7 29 4 34 4 C34 10 30 13 25 13 Z" fill="#43c465"/><rect x="22.6" y="8" width="3" height="6" rx="1.5" fill="#8d5a2b"/><ellipse cx="17.5" cy="20.5" rx="5" ry="3.2" fill="#fff" opacity=".5" transform="rotate(-28 17.5 20.5)"/></svg>',
+'<svg viewBox="0 0 48 48"><g transform="rotate(-24 24 25)"><ellipse cx="24" cy="25" rx="17" ry="11.5" fill="#ffd60a"/><circle cx="7.5" cy="25" r="3.4" fill="#ffd60a"/><circle cx="40.5" cy="25" r="3.4" fill="#ffd60a"/></g><ellipse cx="17" cy="18" rx="5.4" ry="2.8" fill="#fff" opacity=".55" transform="rotate(-24 17 18)"/></svg>',
+'<svg viewBox="0 0 48 48"><path d="M24 16 C19 8 7 12 7 24 C7 36 15 44 24 44 C33 44 41 36 41 24 C41 12 29 8 24 16 Z" fill="#57cc4f"/><rect x="22.8" y="4" width="3.2" height="8" rx="1.6" fill="#8d5a2b" transform="rotate(8 24 8)"/><ellipse cx="33" cy="9" rx="6.6" ry="3.8" fill="#43c465" transform="rotate(-18 33 9)"/><ellipse cx="16.5" cy="23" rx="4.6" ry="3" fill="#fff" opacity=".5" transform="rotate(-26 16.5 23)"/></svg>',
+'<svg viewBox="0 0 48 48"><circle cx="24" cy="25" r="16.5" fill="#4f7cff"/><circle cx="24" cy="25" r="16.5" fill="none"/><path d="M24 15 l2.2 4.4 4.8.7 -3.5 3.4 0.8 4.8 -4.3-2.3 -4.3 2.3 0.8-4.8 -3.5-3.4 4.8-.7 Z" fill="#2b3a8f" transform="translate(0,-3) scale(0.92) translate(2,2)"/><ellipse cx="17" cy="19" rx="5" ry="3.2" fill="#fff" opacity=".5" transform="rotate(-28 17 19)"/></svg>',
+'<svg viewBox="0 0 48 48"><ellipse cx="27" cy="8" rx="7" ry="4" fill="#43c465" transform="rotate(-16 27 8)"/><g fill="#a55eea"><circle cx="17" cy="17" r="6.6"/><circle cx="30" cy="17" r="6.6"/><circle cx="10.5" cy="27" r="6.6"/><circle cx="23.5" cy="27" r="6.6"/><circle cx="36.5" cy="27" r="6.6"/><circle cx="17" cy="37" r="6.6"/><circle cx="30" cy="37" r="6.6"/></g><ellipse cx="14.5" cy="14.5" rx="2.6" ry="1.7" fill="#fff" opacity=".55" transform="rotate(-28 14.5 14.5)"/><ellipse cx="21" cy="24.5" rx="2.6" ry="1.7" fill="#fff" opacity=".45" transform="rotate(-28 21 24.5)"/></svg>'
+];
+const PCOLORS=['#ff5b74','#ffa02e','#ffd93d','#52e06a','#57a7ff','#c77dff'];
 const $=id=>document.getElementById(id);
 let save;try{save=JSON.parse(localStorage.getItem('candyMatchSave')||'null');}catch(e){save=null;}
 save=save||{unlocked:1,done:{},coins:250,boost:{hammer:3,shuffle:2,swap:1,moves:2},lastDaily:'',sound:true};
@@ -206,13 +242,19 @@ let audioCtx=null;
 function beep(f,d,type){if(!save.sound)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(.12,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+(d||.09));o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+(d||.09));}catch(e){}}
 function buzz(ms){if(save.sound&&navigator.vibrate){try{navigator.vibrate(ms||12);}catch(e){}}}
 window.addEventListener('error',()=>{try{if(typeof busy!=='undefined'&&busy){busy=false;render();}}catch(e){}});
-function render(){const bd=$('board');bd.innerHTML='';for(let r=0;r<N;r++)for(let c=0;c<N;c++){const cell=board[r][c];const d=document.createElement('div');d.className='cell c'+cell.t;d.dataset.r=r;d.dataset.c=c;d.textContent=EMOJI[cell.t];if(cell.sp){const s=document.createElement('span');s.className='badge';s.textContent=cell.sp==='bomb'?'🌈':cell.sp==='wrap'?'🎁':cell.sp==='row'?'↔️':'↕️';d.appendChild(s);}if(sel&&sel[0]===r&&sel[1]===c)d.classList.add('sel');if(cursor.r===r&&cursor.c===c)d.classList.add('cursor');d.addEventListener('pointerdown',ev=>{ev.preventDefault();onTap(r,c);});bd.appendChild(d);}
+function render(){const bd=$('board');bd.innerHTML='';for(let r=0;r<N;r++)for(let c=0;c<N;c++){const cell=board[r][c];const d=document.createElement('div');d.className='cell c'+cell.t;d.dataset.r=r;d.dataset.c=c;
+ if(cell.sp==='bomb'){d.classList.add('bombcell');const core=document.createElement('span');core.className='bombCore';d.appendChild(core);}
+ else{d.innerHTML=CANDY_SVG[cell.t];
+  if(cell.sp==='row'||cell.sp==='col'){const st=document.createElement('span');st.className='stripes '+(cell.sp==='row'?'srow':'scol');d.appendChild(st);const s=document.createElement('span');s.className='badge';s.textContent=cell.sp==='row'?'↔':'↕';d.appendChild(s);}
+  else if(cell.sp==='wrap'){const s=document.createElement('span');s.className='badge';s.textContent='✦';s.style.color='#ffe066';s.style.fontSize='.85em';d.appendChild(s);}}
+ if(sel&&sel[0]===r&&sel[1]===c)d.classList.add('sel');if(cursor.r===r&&cursor.c===c)d.classList.add('cursor');d.addEventListener('pointerdown',ev=>{ev.preventDefault();onTap(r,c);});bd.appendChild(d);}
  $('hudLevel').textContent='LEVEL '+level;$('hudMoves').textContent='MOVES '+moves;$('hudScore').textContent='SCORE '+score.toLocaleString('en-IN');$('hudCoins').textContent='🪙 '+save.coins;$('hudStreak').textContent='🔥 Streak '+streak;
  $('progressBar').style.width=Math.min(100,score/target*100)+'%';$('progressText').textContent='🎯 Score '+score.toLocaleString('en-IN')+' / '+target.toLocaleString('en-IN');
  $('nHammer').textContent=save.boost.hammer;$('nShuffle').textContent=save.boost.shuffle;$('nSwap').textContent=save.boost.swap;$('nMoves').textContent=save.boost.moves;
  $('bHammer').classList.toggle('armed',hammerArmed);$('bSwap').classList.toggle('armed',freeSwapArmed);}
 function floatText(r,c,txt){const bd=$('board');const idx=r*N+c;const el=bd.children[idx];if(!el)return;const rect=el.getBoundingClientRect(),wrap=$('boardWrap').getBoundingClientRect();const s=document.createElement('div');s.className='floatScore';s.textContent=txt;s.style.left=(rect.left-wrap.left+rect.width/4)+'px';s.style.top=(rect.top-wrap.top)+'px';$('boardWrap').appendChild(s);setTimeout(()=>s.remove(),850);}
-function startLevel(lv){level=lv;const cfg=levelCfg(lv);numColors=cfg.colors;target=cfg.tgt;moves=cfg.mv;score=0;streak=0;sel=null;gameOver=false;paused=false;hammerArmed=false;freeSwapArmed=false;board=genBoard();render();}
+function spawnSparks(r,c,t){const bd=$('board');const el=bd.children[r*N+c];if(!el)return;const rect=el.getBoundingClientRect(),wrap=$('boardWrap').getBoundingClientRect();const cx=rect.left-wrap.left+rect.width/2-4,cy=rect.top-wrap.top+rect.height/2-4;for(let i=0;i<6;i++){const s=document.createElement('span');s.className='spark';const ang=Math.random()*Math.PI*2,dist=22+Math.random()*26;s.style.setProperty('--dx',Math.cos(ang)*dist+'px');s.style.setProperty('--dy',Math.sin(ang)*dist+'px');s.style.left=cx+'px';s.style.top=cy+'px';s.style.background=PCOLORS[t]||'#ffe066';s.style.boxShadow='0 0 6px '+(PCOLORS[t]||'#ffe066');$('boardWrap').appendChild(s);setTimeout(()=>s.remove(),600);}}
+function startLevel(lv){level=lv;const cfg=levelCfg(lv);numColors=cfg.colors;target=cfg.tgt;moves=cfg.mv;score=0;streak=0;sel=null;gameOver=false;paused=false;hammerArmed=false;freeSwapArmed=false;board=genBoard();render();$('tip').style.display=lv===1?'block':'none';}
 function swapCells(a,b){const t=board[a[0]][a[1]];board[a[0]][a[1]]=board[b[0]][b[1]];board[b[0]][b[1]]=t;}
 async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=findMatches(board);if(!mark.size)break;chain++;streak=Math.max(streak,chain);
   // decide special creation from the longest run containing a swapped cell
@@ -233,6 +275,7 @@ async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=fi
     if(sp==='bomb'){const t=board[r][c].t;for(let i=0;i<N;i++)for(let j=0;j<N;j++)if(board[i][j].t===t)extra.push(i+','+j);}
     for(const e of extra)if(!clear.has(e)){clear.add(e);queue.push(e);}}
   const gained=clear.size*60*Math.min(chain,3);score+=gained;save.coins+=Math.floor(clear.size/3);
+  [...clear].slice(0,12).forEach(k=>{const[r,c]=k.split(',').map(Number);spawnSparks(r,c,board[r][c].t);});
   const first=[...clear][0].split(',').map(Number);floatText(first[0],first[1],'+'+gained);beep(300+chain*90,.1,'triangle');buzz(14);
   // pop animation
   const specialT=specialCell?board[specialCell[0]][specialCell[1]].t:0;
@@ -254,7 +297,7 @@ async function trySwap(a,b){if(busy||paused||gameOver)return;busy=true;const fre
  const ca=board[a[0]][a[1]],cb=board[b[0]][b[1]];
  if(ca.sp==='bomb'||cb.sp==='bomb'){const bombCell=ca.sp==='bomb'?a:b,other=ca.sp==='bomb'?board[b[0]][b[1]]:board[a[0]][a[1]];moves--;board[bombCell[0]][bombCell[1]]={t:other.t,sp:'bomb'};busy=false;await resolveBoard(null);busy=false;render();return;}
  const{mark}=findMatches(board);
- if(!mark.size){swapCells(a,b);beep(140,.08,'square');render();busy=false;return;}
+ if(!mark.size){swapCells(a,b);beep(140,.08,'square');$('board').classList.add('shake');setTimeout(()=>$('board').classList.remove('shake'),320);render();busy=false;return;}
  moves--;await resolveBoard(b);busy=false;render();}
 function onTap(r,c){cursor={r,c};if(hammerArmed){if(save.boost.hammer>0&&!busy){save.boost.hammer--;hammerArmed=false;board[r][c]=null;for(let cc=0;cc<N;cc++){const col=[];for(let rr=N-1;rr>=0;rr--)if(board[rr][cc])col.push(board[rr][cc]);for(let rr=N-1;rr>=0;rr--)board[rr][cc]=col[N-1-rr]||newCandy();}score+=60;beep(240,.1);persist();resolveBoard(null);}render();return;}
  if(!sel){sel=[r,c];beep(520,.05);render();return;}
