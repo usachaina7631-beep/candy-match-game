@@ -11,20 +11,20 @@
 <meta name="apple-mobile-web-app-title" content="Candy Dhamaka">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<title>Candy Dhamaka — Free Candy Match 3 Game | Play Online, 100 Levels</title>
-<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) + v5: PWA installable app (manifest, service worker, install button) 2026-11-02 + v6 majboot/smooth: crash-proof save (try/catch), error auto-unlock, no-select/no-callout, viewport-fit cover, vibration feedback + v9 quality upgrade 2026-11-03 (after CrazyGames quality rejection): hand-drawn glossy SVG candies (no emoji on board), match spark particles, invalid-swap shake, rainbow colour bomb, Level-1 tip bar, bigger desktop layout (620px), gradient title + v10 smooth/strong 2026-11-03 (user: phone par pura fine nahi chal raha): persistent board DOM (cells built once, only changed cells re-render), drop-shadow filter and backdrop blur removed (GPU-heavy on low-end phones), fewer particles, snappier cascade timings + v11 'Candy-Crush-jaisa feel' 2026-11-03 (user ne Candy Crush ka video bhejkar kaha 'yesa hi banao, jitna code lage lagao'): ORIGINAL gradient jelly candies ek SVG sprite se (defs ek baar, har cell <use> — chamak zyada, bojh kam), halki neeli checker board + safed/halki theme, nayi candy girne par bounce (spawn), chain par badi 'Dhamaka! xN' text, jeet par confetti barish + v12 BUG FIX 2026-11-03 (khud khelkar pakda gaya): khali khane wala bug — phooti candy ki 'pop' class usi khane me wapas aayi same-type candy ko hamesha ke liye gayab kar deti thi; ab gravity se pehle pop class saaf hoti hai aur har level ki shuruaat par saare khane fresh bante hain. Confetti ab result window ke andar bhi girti hai (pehle dhundli parat ke peeche chhupti thi). Particles thode bade + v15 COLLECTION GOAL 2026-11-03 (user ke bheje bade-game screenshot wala upar-wala goal dabba): har 5ve level (5,10,15...) par score ki jagah collection target — tay rang ki N candies todni hain (N=12+lv*0.2, us level par +2 moves); progress bar collected gin ti hai, sitare usi hisaab se jalte hain; bomb se poora rang saaf ho to woh bhi gina jata hai. Baaki levels score-target wale hi. + v13 Sweet-Quest features merge 2026-11-03 (user ne dusre AI ka 'Sweet Quest' game bhejkar kaha 'ye sab feature add kar do'): jo cheezein pehle se thi (100 levels, hint, shuffle, sound, progress, modal) wohi rahi; NAYA joda — (1) 🏆 Best Score chip (device par save, jeet/haar dono par update), (2) Message line (#msg): level start, match/cascade, galat swap, hint, dead-board par sandesh, (3) SABSE KAAM KA: dead-board par AUTO-SHUFFLE — pehle board atak sakta tha, ab move na mile to board khud shuffle hokar move wala banta hai. Sweet Quest ka emoji-design NAHI liya (wahi quality CrazyGames ne reject ki thi) + v14 screenshot-inspired 2026-11-03 (user ne ek bade match-3 game ka screenshot bheja): (1) progress bar par 3 sitare — score badhne par ek-ek karke sunehre jalte hain, (2) candies ke neeche gehri parat jodi — 3D jaisi gehrai/chamak aur badhi (art apni hi hai, copy nahi), (3) confetti do lehren me ~2.4 second tak girti hai (v12 ki jaanch me ek lehar screenshot se pehle khatm ho gayi thi, isliye dikhi nahi). Koi copy ki hui art/asset nahi — saari candy shapes khud banayi hui, sirf feel genre-jaisi. -->
-<meta name="description" content="Play Candy Dhamaka, the free candy match game, online in your browser. Swap and match 3 or more candies, unlock striped candies, wrapped candies and colour bombs across 100 fun levels. No download needed — works on mobile and PC.">
+<title>Candy Dhamaka — Free Candy Match 3 Game | Play Online, 300 Levels</title>
+<!-- balance-fix-v2: cascade score multiplier capped at x3 (2026-11-01) + smooth-v3: touch-action none, press feedback, faster cascades + v4: big full-screen button, harder levels (higher targets, fewer moves) + v5: PWA installable app (manifest, service worker, install button) 2026-11-02 + v6 majboot/smooth: crash-proof save (try/catch), error auto-unlock, no-select/no-callout, viewport-fit cover, vibration feedback + v9 quality upgrade 2026-11-03 (after CrazyGames quality rejection): hand-drawn glossy SVG candies (no emoji on board), match spark particles, invalid-swap shake, rainbow colour bomb, Level-1 tip bar, bigger desktop layout (620px), gradient title + v10 smooth/strong 2026-11-03 (user: phone par pura fine nahi chal raha): persistent board DOM (cells built once, only changed cells re-render), drop-shadow filter and backdrop blur removed (GPU-heavy on low-end phones), fewer particles, snappier cascade timings + v11 'Candy-Crush-jaisa feel' 2026-11-03 (user ne Candy Crush ka video bhejkar kaha 'yesa hi banao, jitna code lage lagao'): ORIGINAL gradient jelly candies ek SVG sprite se (defs ek baar, har cell <use> — chamak zyada, bojh kam), halki neeli checker board + safed/halki theme, nayi candy girne par bounce (spawn), chain par badi 'Dhamaka! xN' text, jeet par confetti barish + v12 BUG FIX 2026-11-03 (khud khelkar pakda gaya): khali khane wala bug — phooti candy ki 'pop' class usi khane me wapas aayi same-type candy ko hamesha ke liye gayab kar deti thi; ab gravity se pehle pop class saaf hoti hai aur har level ki shuruaat par saare khane fresh bante hain. Confetti ab result window ke andar bhi girti hai (pehle dhundli parat ke peeche chhupti thi). Particles thode bade + v15 COLLECTION GOAL 2026-11-03 (user ke bheje bade-game screenshot wala upar-wala goal dabba): har 5ve level (5,10,15...) par score ki jagah collection target — tay rang ki N candies todni hain (N=12+lv*0.2, us level par +2 moves); progress bar collected gin ti hai, sitare usi hisaab se jalte hain; bomb se poora rang saaf ho to woh bhi gina jata hai. Baaki levels score-target wale hi. + v13 Sweet-Quest features merge 2026-11-03 (user ne dusre AI ka 'Sweet Quest' game bhejkar kaha 'ye sab feature add kar do'): jo cheezein pehle se thi (100 levels, hint, shuffle, sound, progress, modal) wohi rahi; NAYA joda — (1) 🏆 Best Score chip (device par save, jeet/haar dono par update), (2) Message line (#msg): level start, match/cascade, galat swap, hint, dead-board par sandesh, (3) SABSE KAAM KA: dead-board par AUTO-SHUFFLE — pehle board atak sakta tha, ab move na mile to board khud shuffle hokar move wala banta hai. Sweet Quest ka emoji-design NAHI liya (wahi quality CrazyGames ne reject ki thi) + v14 screenshot-inspired 2026-11-03 (user ne ek bade match-3 game ka screenshot bheja): (1) progress bar par 3 sitare — score badhne par ek-ek karke sunehre jalte hain, (2) candies ke neeche gehri parat jodi — 3D jaisi gehrai/chamak aur badhi (art apni hi hai, copy nahi), (3) confetti do lehren me ~2.4 second tak girti hai (v12 ki jaanch me ek lehar screenshot se pehle khatm ho gayi thi, isliye dikhi nahi). Koi copy ki hui art/asset nahi — saari candy shapes khud banayi hui, sirf feel genre-jaisi. + v16 SAGA UPGRADE 2026-11-03 (user ne Candy Crush Saga ka APK bheja — sirf systems samjhe gaye, koi asset/text/naam/level copy NAHI, sab kuch apna original): (1) SAGA MAP — 10 worlds x 10 levels, apne Hinglish world naam, map par har level ke kamaye sitare; (2) har level ke 1-3 sitare save hote hain (score levels: target/1.5x/2x; collection: goal se zyada ikattha; jelly: bache hue moves); (3) LEVEL-INTRO dabba — goal + moves + best score + star jaankari + KHELO button; (4) LIVES system — 5 lives, haarne par 1 life kam, har 30 minute me 1 life refill (samay save hota hai); HUD wala dil chip pehle sirf dikhawa tha, ab asli system; (5) NAYA goal type JELLY — har 7ve level (7,14,21,...) par board ke khanon ki jelly saaf karni hai, jelly khane par rehti hai candy ke saath nahi girti; (6) jeet dabbe me bade sitare, haar dabbe me 'kitna kam reh gaya' + bachi lives. Cascade score cap x3 pehle se tha — verify kiya. Purane save apne aap chalenge, done levels ko 1 sitara peeche se mila. + v17 LAMBA SAFAR 2026-11-03 (user order: 100 se 300 levels, koi error nahi): levels 300 (30 worlds, naam upar WORLDS list me), mushkili ka graph dobara santulit — naya target/moves formula is hisaab se ki har level jeetne layak rahe (score levels par per-move points ki upar-seema rakhi, collection/jelly counts ko moves ke hisaab se bandha); saare 300 levels ke data ki script-jaanch alag se ki gayi (feature-study-ccs.md me vivaran). -->
+<meta name="description" content="Play Candy Dhamaka, the free candy match game, online in your browser. Swap and match 3 or more candies, unlock striped candies, wrapped candies and colour bombs across 300 fun levels. No download needed — works on mobile and PC.">
 <meta name="keywords" content="candy match game, match 3 game, candy puzzle game online, free candy game, play candy match online">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://usachaina7631-beep.github.io/candy-match-game/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Candy Dhamaka — Free Candy Match 3 Game, Play Online">
-<meta property="og:description" content="Swap, match and blast candies across 100 levels. Free browser game — no download, works on mobile and PC.">
+<meta property="og:description" content="Swap, match and blast candies across 300 levels. Free browser game — no download, works on mobile and PC.">
 <meta property="og:url" content="https://usachaina7631-beep.github.io/candy-match-game/">
 <meta name="theme-color" content="#7b2ff7">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍬</text></svg>">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"VideoGame","name":"Candy Dhamaka","description":"A free match-3 candy puzzle game (candy match game) with 100 levels, boosters and special candies. Play online in your browser on mobile or PC.","url":"https://usachaina7631-beep.github.io/candy-match-game/","applicationCategory":"Game","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"inLanguage":"en"}
+{"@context":"https://schema.org","@type":"VideoGame","name":"Candy Dhamaka","description":"A free match-3 candy puzzle game (candy match game) with 300 levels, boosters and special candies. Play online in your browser on mobile or PC.","url":"https://usachaina7631-beep.github.io/candy-match-game/","applicationCategory":"Game","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"inLanguage":"en"}
 </script>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -105,6 +105,18 @@ button.armed{background:linear-gradient(180deg,#ff5f6d,#ff2e63);color:#fff}
 #levelGrid button{padding:9px 0;font-size:14px}
 #levelGrid button.locked{opacity:.4}
 #levelGrid button.done{background:linear-gradient(180deg,#a8ff78,#43c465);color:#083d17}
+.worldBox{margin-bottom:14px;text-align:left}
+.worldHead{display:flex;justify-content:space-between;font-weight:800;font-size:14px;margin-bottom:6px;color:#ffe9a8}
+.worldGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.worldGrid button{padding:7px 0;font-size:14px;line-height:1.2}
+.worldGrid button.locked{opacity:.4}
+.worldGrid button.done{background:linear-gradient(180deg,#a8ff78,#43c465);color:#083d17}
+.worldGrid button.next{box-shadow:0 0 0 3px #ffd43b,0 0 14px #ffd43b}
+.bstars{font-size:10px;color:#b8860b;min-height:12px;letter-spacing:1px}
+.bstars .off{color:rgba(0,0,0,.22)}
+.jellyLayer{position:absolute;inset:6%;border-radius:26%;background:rgba(150,255,205,.5);border:2px solid rgba(255,255,255,.85);z-index:0;pointer-events:none}
+#resStars{font-size:42px;letter-spacing:5px;color:#ffd43b;text-shadow:0 3px 0 rgba(0,0,0,.35);min-height:50px}
+#btnPlay{font-size:17px;padding:12px 28px;background:linear-gradient(180deg,#a8ff78,#43c465);color:#083d17}
 .shopRow{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.1);border-radius:12px;padding:9px 12px;margin:7px 0;font-size:14px}
 .helpText{text-align:left;font-size:13.5px;line-height:1.55}
 #btnBigFull{width:min(520px,96vw);padding:14px;font-size:18px;border-radius:16px;background:linear-gradient(90deg,#ff8c42,#f107a3);color:#fff;letter-spacing:.4px;margin-bottom:10px;box-shadow:0 5px 0 rgba(0,0,0,.3)}
@@ -134,7 +146,7 @@ footer{margin-top:16px;font-size:12px;opacity:.9;text-align:center;max-width:520
 <symbol id="cd5" viewBox="0 0 60 60"><circle cx="30" cy="30" r="21" fill="url(#g5)"/><ellipse cx="30" cy="42" rx="13.5" ry="4.4" fill="#4a1160" opacity=".16"/><path d="M30 16 a14 14 0 1 1 -14 14 a10.5 10.5 0 1 0 10.5 -10.5 a7 7 0 1 1 -7 7" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" opacity=".5"/><ellipse cx="23" cy="20" rx="8" ry="4.4" fill="#ffffff" opacity=".6" transform="rotate(-24 23 20)"/></symbol>
 </defs></svg>
 <h1>🍬 Candy Dhamaka</h1>
-<div class="tagline">Candy Match 3 ka full dhamaka! Swap • Match • Blast — 100 levels, free, no download!</div>
+<div class="tagline">Candy Match 3 ka full dhamaka! Swap • Match • Blast — 300 levels, free, no download!</div>
 
 <button id="btnBigFull">⛶ FULL SCREEN ME KHELO</button>
 <button id="btnInstall">📲 APP INSTALL KARO — FREE</button>
@@ -144,7 +156,7 @@ footer{margin-top:16px;font-size:12px;opacity:.9;text-align:center;max-width:520
   <span class="chip" id="hudMoves">MOVES 22</span>
   <span class="chip" id="hudScore">SCORE 0</span>
  <span class="chip" id="hudBest">🏆 Best 0</span>
-  <span class="chip">❤️❤️❤️❤️❤️ FULL</span>
+  <span class="chip" id="hudLives">❤️❤️❤️❤️❤️</span>
   <span class="chip" id="hudCoins">🪙 250</span>
   <span class="chip" id="hudStreak">🔥 Streak 0</span>
 </div>
@@ -176,14 +188,29 @@ footer{margin-top:16px;font-size:12px;opacity:.9;text-align:center;max-width:520
 <!-- Level select -->
 <div class="overlay" id="ovLevels"><div class="panel">
   <h2>🗺️ Choose Level</h2>
-  <div style="font-size:13px;opacity:.9">Finish a level to unlock the next one. ⭐ = completed</div>
-  <div id="levelGrid"></div>
+  <div style="font-size:13px;opacity:.9">30 worlds, har world me 10 levels. Level jeeto, ⭐ kamao, aage badho!</div>
+  <div id="levelWorlds"></div>
   <br><button id="btnCloseLevels">▶ Play</button>
+</div></div>
+
+<!-- Level intro -->
+<div class="overlay" id="ovIntro"><div class="panel">
+  <h2 id="introTitle">Level 1</h2>
+  <div id="introWorld" style="font-size:14px;opacity:.9;margin-bottom:8px"></div>
+  <div id="introGoal" style="font-size:17px;font-weight:800;line-height:1.5"></div>
+  <div id="introMoves" style="font-size:14px;margin-top:6px"></div>
+  <div id="introStarInfo" style="font-size:12.5px;opacity:.9;margin-top:6px"></div>
+  <div id="introBest" style="font-size:13.5px;margin-top:8px"></div>
+  <div id="introLives" style="font-size:13.5px;margin-top:6px"></div>
+  <br>
+  <button id="btnPlay">▶ KHELO</button>
+  <button id="btnIntroMap">🗺️ Map</button>
 </div></div>
 
 <!-- Result -->
 <div class="overlay" id="ovResult"><div class="panel">
   <h2 id="resTitle">🎉 Level Complete!</h2>
+  <div id="resStars"></div>
   <div id="resBody" style="font-size:15px;line-height:1.6"></div>
   <br>
   <button id="btnNext">▶ Next Level</button>
@@ -219,6 +246,9 @@ footer{margin-top:16px;font-size:12px;opacity:.9;text-align:center;max-width:520
     <p>💥 <b>Match 4</b> = Striped Candy (safed dhariyan — poori row/column saaf)<br>
     🎁 <b>L/T shape match</b> = Wrapped Candy (sunehra ✦ nishan — 3×3 blast)<br>
     🌈 <b>Match 5</b> = Colour Bomb (ghumti hui rainbow goli — ek poora colour saaf)</p>
+    <p>🗺️ <b>Worlds & Sitare:</b> 300 levels 30 worlds me bante hain. Har level par 1–3 ⭐ kamao — map (🗺️ Levels) par har level ke sitare dikhte hain.</p>
+    <p>❤️ <b>Lives:</b> kul 5 lives. Level haarne par 1 life kati hai; har 30 minute me 1 life apne aap wapas bhar jaati hai.</p>
+    <p>🟩 <b>Jelly levels:</b> kuch levels (har 7va) par board ke khanon par hari jelly jami hoti hai — us khane par match karo to jelly saaf hoti hai. Saari jelly saaf = jeet!</p>
     <p>⌨️ Keyboard: Arrows = cursor, Enter/Space = select/swap, WASD = swap, H = hint, P = pause.</p>
   </div>
   <button id="btnCloseHelp">Got it!</button>
@@ -245,10 +275,29 @@ const PCOLORS=['#ff5b74','#ffa02e','#ffd93d','#52e06a','#57a7ff','#c77dff'];
 const $=id=>document.getElementById(id);
 let save;try{save=JSON.parse(localStorage.getItem('candyMatchSave')||'null');}catch(e){save=null;}
 save=save||{unlocked:1,done:{},coins:250,boost:{hammer:3,shuffle:2,swap:1,moves:2},lastDaily:'',sound:true,best:0};if(save.best===undefined)save.best=0;
+/* v16 migration: purane saves ke liye naye fields */
+if(!save.stars)save.stars={};if(!save.scores)save.scores={};if(save.lives===undefined)save.lives=5;if(save.livesTs===undefined)save.livesTs=0;for(const dk in save.done){if(!save.stars[dk])save.stars[dk]=1;}if(save.unlocked>300)save.unlocked=300;
 let level=1,board=[],score=0,moves=0,target=0,numColors=4,sel=null,busy=false,paused=false,streak=0,hammerArmed=false,freeSwapArmed=false,cursor={r:0,c:0},gameOver=false;
-let goalType=-1,goalNeed=0,collected=0;
+let goalType=-1,goalNeed=0,collected=0,goalKind='score',jelly=null;
 function persist(){try{localStorage.setItem('candyMatchSave',JSON.stringify(save));}catch(e){}}
-function levelCfg(lv){const colors=lv<=15?4:(lv<=50?5:6);const tgt=3000+lv*750;let mv=Math.max(13,24-Math.floor(lv/6));let goal=null;if(lv%5===0){goal={type:(Math.floor(lv/5)-1)%colors,count:12+Math.floor(lv*0.2)};mv+=2;}return{colors,tgt,mv,goal};}
+/* v16 saga upgrade: worlds, stars, lives, jelly, intro */
+const MAXLIVES=5,REFILL_MS=30*60*1000;
+const WORLDS=[['Mithaas Gali','🍬'],['Nimbu Bagh','🍋'],['Aam Ras Pahad','🥭'],['Angoor Bagiya','🍇'],['Khaas Beri Van','🍓'],['Ananas Parvat','🍍'],['Tarbooz Tarai','🍉'],['Aaroo Udyan','🍑'],['Cheri Chadhaan','🍒'],['Satrangi Shikhar','🌈'],['Kela Kinara','🍌'],['Santara Sagar','🍊'],['Nashpati Nagri','🍐'],['Seb Sarovar','🍎'],['Khajoor Khaadi','🌴'],['Kharbooja Khaas','🍈'],['Shehad Shahar','🍯'],['Kulfi Killa','🍦'],['Cupcake Chauraha','🧁'],['Donut Dweep','🍩'],['Chocolate Choupal','🍫'],['Lollipop Lok','🍭'],['Nariyal Nadi','🥥'],['Jamun Jungle','🫐'],['Kiwi Vaadi','🥝'],['Barf Gola Bazaar','🍧'],['Falooda Fawwara','🥤'],['Pastry Pathaar','🎂'],['Akhrot Akhaada','🌰'],['Shahi Mithaas Darbaar','👑']];
+function worldOf(lv){return WORLDS[Math.min(29,Math.floor((lv-1)/10))];}
+function jellyRemaining(){if(!jelly)return 0;let n=0;for(let r=0;r<N;r++)for(let c=0;c<N;c++)n+=jelly[r][c];return n;}
+function starsForWin(){if(goalKind==='collect'){const r=goalNeed?collected/goalNeed:1;return r>=1.6?3:(r>=1.3?2:1);}if(goalKind==='jelly'){const mv=levelCfg(level).mv;return moves>=Math.ceil(mv*0.5)?3:(moves>=Math.ceil(mv*0.25)?2:1);}return score>=target*2?3:(score>=target*1.5?2:1);}
+function refreshLives(){let ch=false;if(save.lives>=MAXLIVES){if(save.livesTs){save.livesTs=0;ch=true;}}else{if(!save.livesTs){save.livesTs=Date.now();ch=true;}const gain=Math.floor((Date.now()-save.livesTs)/REFILL_MS);if(gain>0){save.lives=Math.min(MAXLIVES,save.lives+gain);save.livesTs=save.lives>=MAXLIVES?0:save.livesTs+gain*REFILL_MS;ch=true;}}if(ch)persist();}
+function livesChipHTML(){refreshLives();let s='';for(let i=0;i<MAXLIVES;i++)s+=i<save.lives?'❤️':'🖤';if(save.lives<MAXLIVES&&save.livesTs){const rem=REFILL_MS-((Date.now()-save.livesTs)%REFILL_MS);s+=' ⏱ '+Math.floor(rem/60000)+':'+String(Math.floor((rem%60000)/1000)).padStart(2,'0');}return s;}
+function fillIntroLives(){refreshLives();const b=$('btnPlay');if(save.lives>0){$('introLives').textContent='❤️ Lives: '+save.lives+' / '+MAXLIVES;b.disabled=false;b.textContent='▶ KHELO';}else{const rem=save.livesTs?(REFILL_MS-((Date.now()-save.livesTs)%REFILL_MS)):0;$('introLives').textContent='😢 Lives khatam! Ek life '+Math.floor(rem/60000)+':'+String(Math.floor((rem%60000)/1000)).padStart(2,'0')+' me milegi.';b.disabled=true;b.textContent='⏳ Lives Bhar Rahi Hain';}}
+function openIntro(){const w=worldOf(level);const wFirst=Math.floor((level-1)/10)*10+1;$('introTitle').textContent='Level '+level;$('introWorld').textContent=w[1]+' '+w[0]+' • Levels '+wFirst+'–'+(wFirst+9);
+if(goalKind==='collect'){$('introGoal').innerHTML='🎯 <b>'+goalNeed+'</b> '+['🔴','🟠','🟡','🟢','🔵','🟣'][goalType]+' candies todo!';$('introStarInfo').textContent='⭐ goal pura • ⭐⭐ goal se 30% zyada • ⭐⭐⭐ 60% zyada ikattha';}
+else if(goalKind==='jelly'){$('introGoal').innerHTML='🎯 Board ki <b>'+goalNeed+'</b> 🟩 jelly saaf karo!';$('introStarInfo').textContent='⭐ jelly saaf • ⭐⭐ ¼ moves bachakar • ⭐⭐⭐ aadhe moves bachakar';}
+else{$('introGoal').innerHTML='🎯 Score target: <b>'+target.toLocaleString('en-IN')+'</b> points';$('introStarInfo').textContent='⭐ target pura • ⭐⭐ target × 1.5 • ⭐⭐⭐ target × 2 score';}
+$('introMoves').textContent='👣 Moves: '+moves+' • 🪙 Jeet bonus: '+(50+level*2)+' coins';
+$('introBest').innerHTML=save.scores[level]?('🏆 Tumhara best: <b>'+save.scores[level].toLocaleString('en-IN')+'</b>'+(save.stars[level]?(' &nbsp;'+'★'.repeat(save.stars[level])+'☆'.repeat(3-save.stars[level])):'')):'🌟 Is level par pehli baar — all the best!';
+fillIntroLives();$('ovIntro').classList.add('show');}
+function enterLevel(lv){refreshLives();startLevel(lv);openIntro();}
+function levelCfg(lv){const colors=lv<=20?4:(lv<=120?5:6);const tgt=Math.round((2400+lv*44+Math.floor(lv/25)*150)/10)*10;let mv=Math.max(20,28-Math.floor(lv/18));let goal=null;if(lv%5===0){goal={kind:'collect',type:(Math.floor(lv/5)-1)%colors,count:Math.min(10+Math.floor(lv*0.09),Math.floor((mv+2)*1.6))};mv+=2;}else if(lv%7===0){goal={kind:'jelly',count:Math.min(30,10+Math.floor(lv/6))};mv+=3;}return{colors,tgt,mv,goal};}
 function rnd(n){return Math.floor(Math.random()*n);}
 function newCandy(){return{t:rnd(numColors),sp:null};}
 function wouldMatch(b,r,c){const t=b[r][c].t;let n=1;for(let i=c-1;i>=0&&b[r][i].t===t;i--)n++;for(let i=c+1;i<N&&b[r][i].t===t;i++)n++;if(n>=3)return true;n=1;for(let i=r-1;i>=0&&b[i][c].t===t;i--)n++;for(let i=r+1;i<N&&b[i][c].t===t;i++)n++;return n>=3;}
@@ -265,15 +314,20 @@ window.addEventListener('error',()=>{try{if(typeof busy!=='undefined'&&busy){bus
 /* v10 smooth: persistent board DOM — cells are built once, render() only updates changed cells */
 let cellEls=[];
 function buildBoardDOM(){const bd=$('board');bd.innerHTML='';cellEls=[];for(let r=0;r<N;r++){cellEls.push([]);for(let c=0;c<N;c++){const d=document.createElement('div');d.dataset.r=r;d.dataset.c=c;d.addEventListener('pointerdown',ev=>{ev.preventDefault();onTap(r,c);});bd.appendChild(d);cellEls[r].push(d);}}}
-function render(){if(!cellEls.length)buildBoardDOM();for(let r=0;r<N;r++)for(let c=0;c<N;c++){const cell=board[r][c];const d=cellEls[r][c];const sig=cell.t+'|'+(cell.sp||'');
+function render(){if(!cellEls.length)buildBoardDOM();for(let r=0;r<N;r++)for(let c=0;c<N;c++){const cell=board[r][c];const d=cellEls[r][c];const sig=cell.t+'|'+(cell.sp||'')+'|'+((jelly&&jelly[r][c])?'J':'');
  if(d.dataset.sig!==sig){d.dataset.sig=sig;d.className='cell c'+cell.t+(((r+c)%2)?' alt':'')+' spawn';d.innerHTML='';
-  if(cell.sp==='bomb'){d.classList.add('bombcell');const core=document.createElement('span');core.className='bombCore';d.appendChild(core);}
-  else{d.innerHTML=CANDY_SVG[cell.t];
+  if(cell.sp==='bomb'){d.classList.add('bombcell');const core=document.createElement('span');core.className='bombCore';d.appendChild(core);if(jelly&&jelly[r][c]){const jl=document.createElement('span');jl.className='jellyLayer';d.appendChild(jl);}}
+  else{d.innerHTML=CANDY_SVG[cell.t];if(jelly&&jelly[r][c]){const jl=document.createElement('span');jl.className='jellyLayer';d.appendChild(jl);}
    if(cell.sp==='row'||cell.sp==='col'){const st=document.createElement('span');st.className='stripes '+(cell.sp==='row'?'srow':'scol');d.appendChild(st);const s=document.createElement('span');s.className='badge';s.textContent=cell.sp==='row'?'↔':'↕';d.appendChild(s);}
    else if(cell.sp==='wrap'){const s=document.createElement('span');s.className='badge';s.textContent='✦';s.style.color='#ffe066';s.style.fontSize='.85em';d.appendChild(s);}}}
  d.classList.remove('hint');d.classList.toggle('sel',!!(sel&&sel[0]===r&&sel[1]===c));d.classList.toggle('cursor',cursor.r===r&&cursor.c===c);}
- $('hudLevel').textContent='LEVEL '+level;$('hudMoves').textContent='MOVES '+moves;$('hudScore').textContent='SCORE '+score.toLocaleString('en-IN');$('hudBest').textContent='🏆 Best '+(save.best||0).toLocaleString('en-IN');$('hudCoins').textContent='🪙 '+save.coins;$('hudStreak').textContent='🔥 Streak '+streak;
- $('progressBar').style.width=Math.min(100,score/target*100)+'%';if(goalType>=0){$('progressText').textContent='🎯 '+['🔴','🟠','🟡','🟢','🔵','🟣'][goalType]+' '+collected+' / '+goalNeed;}else{$('progressText').textContent='🎯 Score '+score.toLocaleString('en-IN')+' / '+target.toLocaleString('en-IN');}const pc=goalType>=0?(goalNeed?collected/goalNeed:0):(target?score/target:0);['star1','star2','star3'].forEach((id,i)=>{const el=$(id);if(el)el.classList.toggle('on',pc>=(i+1)/3);});
+ $('hudLevel').textContent='LEVEL '+level;$('hudMoves').textContent='MOVES '+moves;$('hudScore').textContent='SCORE '+score.toLocaleString('en-IN');$('hudBest').textContent='🏆 Best '+(save.best||0).toLocaleString('en-IN');$('hudCoins').textContent='🪙 '+save.coins;$('hudStreak').textContent='🔥 Streak '+streak;$('hudLives').innerHTML=livesChipHTML();
+ const pc=goalKind==='collect'?(goalNeed?collected/goalNeed:0):(goalKind==='jelly'?(goalNeed?(goalNeed-jellyRemaining())/goalNeed:0):(target?score/target:0));
+ $('progressBar').style.width=Math.min(100,pc*100)+'%';
+ if(goalKind==='collect'){$('progressText').textContent='🎯 '+['🔴','🟠','🟡','🟢','🔵','🟣'][goalType]+' '+collected+' / '+goalNeed;}
+ else if(goalKind==='jelly'){$('progressText').textContent='🟩 Jelly saaf '+(goalNeed-jellyRemaining())+' / '+goalNeed;}
+ else{$('progressText').textContent='🎯 Score '+score.toLocaleString('en-IN')+' / '+target.toLocaleString('en-IN');}
+ ['star1','star2','star3'].forEach((id,i)=>{const el=$(id);if(el)el.classList.toggle('on',pc>=(i+1)/3);});
  $('nHammer').textContent=save.boost.hammer;$('nShuffle').textContent=save.boost.shuffle;$('nSwap').textContent=save.boost.swap;$('nMoves').textContent=save.boost.moves;
  $('bHammer').classList.toggle('armed',hammerArmed);$('bSwap').classList.toggle('armed',freeSwapArmed);}
 function setMsg(t){const m=$('msg');if(m)m.textContent=t;}
@@ -282,7 +336,7 @@ function bigText(txt){const d=document.createElement('div');d.className='bigTxt'
 function confetti(){const cols=['#ff5a4e','#ff9f2e','#ffd93b','#69db7c','#4dabf7','#cc5de8'];const wave=()=>{for(const wrap of[$('boardWrap'),$('ovResult')]){if(!wrap)continue;for(let i=0;i<16;i++){const s=document.createElement('span');s.className='confetti';s.style.left=(4+Math.random()*92)+'%';s.style.top='-16px';s.style.background=cols[i%6];s.style.animationDelay=(Math.random()*0.2)+'s';wrap.appendChild(s);setTimeout(()=>s.remove(),2500);}}};wave();setTimeout(wave,700);}
 function floatText(r,c,txt){const bd=$('board');const idx=r*N+c;const el=bd.children[idx];if(!el)return;const rect=el.getBoundingClientRect(),wrap=$('boardWrap').getBoundingClientRect();const s=document.createElement('div');s.className='floatScore';s.textContent=txt;s.style.left=(rect.left-wrap.left+rect.width/4)+'px';s.style.top=(rect.top-wrap.top)+'px';$('boardWrap').appendChild(s);setTimeout(()=>s.remove(),850);}
 function spawnSparks(r,c,t){const bd=$('board');const el=bd.children[r*N+c];if(!el)return;const rect=el.getBoundingClientRect(),wrap=$('boardWrap').getBoundingClientRect();const cx=rect.left-wrap.left+rect.width/2-4,cy=rect.top-wrap.top+rect.height/2-4;for(let i=0;i<5;i++){const s=document.createElement('span');s.className='spark';const ang=Math.random()*Math.PI*2,dist=20+Math.random()*22;s.style.setProperty('--dx',Math.cos(ang)*dist+'px');s.style.setProperty('--dy',Math.sin(ang)*dist+'px');s.style.left=cx+'px';s.style.top=cy+'px';s.style.background=PCOLORS[t]||'#ffe066';s.style.boxShadow='0 0 6px '+(PCOLORS[t]||'#ffe066');$('boardWrap').appendChild(s);setTimeout(()=>s.remove(),600);}}
-function startLevel(lv){level=lv;const cfg=levelCfg(lv);numColors=cfg.colors;target=cfg.tgt;moves=cfg.mv;score=0;goalType=cfg.goal?cfg.goal.type:-1;goalNeed=cfg.goal?cfg.goal.count:0;collected=0;streak=0;sel=null;gameOver=false;paused=false;hammerArmed=false;freeSwapArmed=false;board=genBoard();cellEls.forEach(row=>row.forEach(d=>delete d.dataset.sig));render();$('tip').style.display=lv===1?'block':'none';setMsg(cfg.goal?('🎯 Level '+lv+' — '+cfg.goal.count+' '+['🔴','🟠','🟡','🟢','🔵','🟣'][cfg.goal.type]+' candies todo!'):('🎯 Level '+lv+' — target '+cfg.tgt.toLocaleString('en-IN')+' points!'));}
+function startLevel(lv){level=lv;const cfg=levelCfg(lv);numColors=cfg.colors;target=cfg.tgt;moves=cfg.mv;score=0;goalKind=cfg.goal?cfg.goal.kind:'score';goalType=(cfg.goal&&cfg.goal.kind==='collect')?cfg.goal.type:-1;goalNeed=cfg.goal?cfg.goal.count:0;collected=0;jelly=null;if(goalKind==='jelly'){jelly=Array.from({length:N},()=>Array(N).fill(0));let placed=0,guard=0;while(placed<goalNeed&&guard++<800){const jr=rnd(N),jc=rnd(N);if(!jelly[jr][jc]){jelly[jr][jc]=1;placed++;}}}streak=0;sel=null;gameOver=false;paused=false;hammerArmed=false;freeSwapArmed=false;board=genBoard();cellEls.forEach(row=>row.forEach(d=>delete d.dataset.sig));render();$('tip').style.display=lv===1?'block':'none';setMsg(goalKind==='collect'?('🎯 Level '+lv+' — '+goalNeed+' '+['🔴','🟠','🟡','🟢','🔵','🟣'][goalType]+' candies todo!'):(goalKind==='jelly'?('🎯 Level '+lv+' — '+goalNeed+' 🟩 jelly saaf karo!'):('🎯 Level '+lv+' — target '+target.toLocaleString('en-IN')+' points!')));}
 function swapCells(a,b){const t=board[a[0]][a[1]];board[a[0]][a[1]]=board[b[0]][b[1]];board[b[0]][b[1]]=t;}
 async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=findMatches(board);if(!mark.size)break;chain++;streak=Math.max(streak,chain);
   // decide special creation from the longest run containing a swapped cell
@@ -307,6 +361,7 @@ async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=fi
   const first=[...clear][0].split(',').map(Number);floatText(first[0],first[1],'+'+gained);if(chain>=2)bigText('Dhamaka! x'+chain);setMsg(chain>=2?('🔥 Cascade x'+chain+' — kamaal!'):'🍬 Badhiya match!');beep(300+chain*90,.1,'triangle');buzz(14);
   // pop animation
   if(goalType>=0){clear.forEach(k=>{const[r,c]=k.split(',').map(Number);if(board[r][c]&&board[r][c].t===goalType&&!(specialCell&&r===specialCell[0]&&c===specialCell[1]))collected++;});}
+  if(jelly){clear.forEach(k=>{const[r,c]=k.split(',').map(Number);if(jelly[r][c]){jelly[r][c]=0;score+=30;}});}
    const specialT=specialCell?board[specialCell[0]][specialCell[1]].t:0;
   const bd=$('board');clear.forEach(k=>{const[r,c]=k.split(',').map(Number);const el=bd.children[r*N+c];if(el)el.classList.add('pop');});
   render();await wait(200);
@@ -319,8 +374,8 @@ async function resolveBoard(swapped){let chain=0;while(true){const{mark,runs}=fi
  persist();render();checkEnd();}
 function boardRunsType(runs,cell){for(const run of runs)if(run.cells.some(x=>x[0]===cell[0]&&x[1]===cell[1]))return board[cell[0]][cell[1]]?board[cell[0]][cell[1]].t:0;return 0;}
 function wait(ms){return new Promise(r=>setTimeout(r,ms));}
-function checkEnd(){if(gameOver)return;const won=goalType>=0?collected>=goalNeed:score>=target;if(won&&moves>=0){gameOver=true;save.done[level]=true;if(score>save.best)save.best=score;confetti();if(level<100)save.unlocked=Math.max(save.unlocked,level+1);save.coins+=50+level*2;persist();$('resTitle').textContent='🎉 Level '+level+' Complete!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Bonus: +'+(50+level*2)+' 🪙 coins<br>Level '+(level+1<=100?(level+1)+' unlocked!':'— tumne saare 100 levels paar kar liye! 🏆');$('btnNext').style.display=level<100?'':'none';$('ovResult').classList.add('show');beep(660,.15);setTimeout(()=>beep(880,.2),160);buzz([50,60,50,60,90]);}
- else if(moves<=0){gameOver=true;if(score>save.best)save.best=score;persist();$('resTitle').textContent='😢 Out of Moves!';$('resBody').innerHTML='Score: <b>'+score.toLocaleString('en-IN')+'</b> / '+target.toLocaleString('en-IN')+'<br>Thoda sa reh gaya — ek baar phir try karo!';$('btnNext').style.display='none';$('ovResult').classList.add('show');beep(180,.25,'sawtooth');}}
+function checkEnd(){if(gameOver)return;const won=goalKind==='collect'?collected>=goalNeed:(goalKind==='jelly'?jellyRemaining()<=0:score>=target);if(won&&moves>=0){gameOver=true;save.done[level]=true;const wst=starsForWin();save.stars[level]=Math.max(save.stars[level]||0,wst);save.scores[level]=Math.max(save.scores[level]||0,score);if(score>save.best)save.best=score;confetti();if(level<300)save.unlocked=Math.max(save.unlocked,level+1);save.coins+=50+level*2;persist();$('resTitle').textContent='🎉 Level '+level+' Complete!';$('resStars').innerHTML='★'.repeat(wst)+'<span style="color:rgba(255,255,255,.28)">'+'★'.repeat(3-wst)+'</span>';$('resBody').innerHTML=(goalKind==='collect'?'🎯 Collection goal pura hua!<br>':(goalKind==='jelly'?'🟩 Saari jelly saaf ho gayi!<br>':''))+'Score: <b>'+score.toLocaleString('en-IN')+'</b><br>Bonus: +'+(50+level*2)+' 🪙 coins<br>'+(level<300?('Level '+(level+1)+' unlocked!'):'Tumne saare 300 levels paar kar liye! 🏆');$('btnNext').style.display=level<300?'':'none';$('ovResult').classList.add('show');beep(660,.15);setTimeout(()=>beep(880,.2),160);buzz([50,60,50,60,90]);}
+ else if(moves<=0){gameOver=true;if(score>save.best)save.best=score;save.lives=Math.max(0,save.lives-1);if(save.lives<MAXLIVES&&!save.livesTs)save.livesTs=Date.now();persist();$('resTitle').textContent='😢 Out of Moves!';$('resStars').innerHTML='<span style="color:rgba(255,255,255,.28)">★★★</span>';$('resBody').innerHTML=(goalKind==='collect'?('Sirf <b>'+(goalNeed-collected)+'</b> '+['🔴','🟠','🟡','🟢','🔵','🟣'][goalType]+' candies aur todni thi!'):(goalKind==='jelly'?('Sirf <b>'+jellyRemaining()+'</b> 🟩 jelly saaf karni reh gayi!'):('Sirf <b>'+(target-score).toLocaleString('en-IN')+'</b> points kam reh gaye!')))+'<br>❤️ Ek life gayi — ab <b>'+save.lives+'</b> lives bachi.'+(save.lives===0?'<br>⏱ Ek life 30 minute me wapas milegi.':'');$('btnNext').style.display='none';$('ovResult').classList.add('show');beep(180,.25,'sawtooth');}}
 async function trySwap(a,b){if(busy||paused||gameOver)return;busy=true;const free=freeSwapArmed;swapCells(a,b);render();await wait(110);
  if(freeSwapArmed){freeSwapArmed=false;save.boost.swap--;busy=false;persist();await resolveBoard(b);busy=false;render();return;}
  // bomb direct swap: swapping a colour bomb with a candy clears that colour
@@ -329,7 +384,7 @@ async function trySwap(a,b){if(busy||paused||gameOver)return;busy=true;const fre
  const{mark}=findMatches(board);
  if(!mark.size){swapCells(a,b);beep(140,.08,'square');$('board').classList.add('shake');setTimeout(()=>$('board').classList.remove('shake'),320);setMsg('Match nahi bana — dusri candy try karo!');render();busy=false;return;}
  moves--;await resolveBoard(b);if(!gameOver&&!findMove(board)){setMsg('Koi move nahi bacha — board shuffle ho raha hai! 🔀');reshuffle();render();await wait(150);}busy=false;render();}
-function onTap(r,c){cursor={r,c};if(hammerArmed){if(save.boost.hammer>0&&!busy){save.boost.hammer--;hammerArmed=false;board[r][c]=null;for(let cc=0;cc<N;cc++){const col=[];for(let rr=N-1;rr>=0;rr--)if(board[rr][cc])col.push(board[rr][cc]);for(let rr=N-1;rr>=0;rr--)board[rr][cc]=col[N-1-rr]||newCandy();}score+=60;beep(240,.1);persist();resolveBoard(null);}render();return;}
+function onTap(r,c){cursor={r,c};if(hammerArmed){if(save.boost.hammer>0&&!busy){save.boost.hammer--;hammerArmed=false;board[r][c]=null;if(jelly)jelly[r][c]=0;for(let cc=0;cc<N;cc++){const col=[];for(let rr=N-1;rr>=0;rr--)if(board[rr][cc])col.push(board[rr][cc]);for(let rr=N-1;rr>=0;rr--)board[rr][cc]=col[N-1-rr]||newCandy();}score+=60;beep(240,.1);persist();resolveBoard(null);}render();return;}
  if(!sel){sel=[r,c];beep(520,.05);render();return;}
  const dr=Math.abs(sel[0]-r),dc=Math.abs(sel[1]-c);
  if(dr+dc===1){const a=sel;sel=null;trySwap(a,[r,c]);}
@@ -368,17 +423,20 @@ $('btnDaily').onclick=()=>{const today=new Date().toDateString();if(save.lastDai
 $('btnExport').onclick=()=>{const blob=new Blob([JSON.stringify(save,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='candy-match-save.json';a.click();URL.revokeObjectURL(a.href);};
 $('btnHelp').onclick=()=>$('ovHelp').classList.add('show');
 $('btnCloseHelp').onclick=()=>$('ovHelp').classList.remove('show');
-$('btnNext').onclick=()=>{$('ovResult').classList.remove('show');if(level<100)startLevel(level+1);};
-$('btnRetry').onclick=()=>{$('ovResult').classList.remove('show');startLevel(level);};
+$('btnNext').onclick=()=>{$('ovResult').classList.remove('show');if(level<300)enterLevel(level+1);};
+$('btnRetry').onclick=()=>{$('ovResult').classList.remove('show');enterLevel(level);};
 $('btnResLevels').onclick=()=>{$('ovResult').classList.remove('show');buildLevels();$('ovLevels').classList.add('show');};
-function buildLevels(){const g=$('levelGrid');g.innerHTML='';for(let i=1;i<=100;i++){const b=document.createElement('button');b.textContent=(save.done[i]?'⭐ ':'')+i;if(i>save.unlocked)b.classList.add('locked');if(save.done[i])b.classList.add('done');b.disabled=i>save.unlocked;b.onclick=()=>{$('ovLevels').classList.remove('show');startLevel(i);};g.appendChild(b);}}
-document.addEventListener('keydown',e=>{if(paused&&e.key.toLowerCase()!=='p')return;const k=e.key.toLowerCase();
+$('btnPlay').onclick=()=>$('ovIntro').classList.remove('show');
+$('btnIntroMap').onclick=()=>{$('ovIntro').classList.remove('show');buildLevels();$('ovLevels').classList.add('show');};
+setInterval(()=>{const el=$('hudLives');if(el)el.innerHTML=livesChipHTML();if($('ovIntro').classList.contains('show'))fillIntroLives();},1000);
+function buildLevels(){const wrap=$('levelWorlds');wrap.innerHTML='';for(let w=0;w<30;w++){const first=w*10+1;let wStars=0;for(let i=first;i<first+10;i++)wStars+=save.stars[i]||0;const box=document.createElement('div');box.className='worldBox';const head=document.createElement('div');head.className='worldHead';head.innerHTML='<span>'+WORLDS[w][1]+' '+WORLDS[w][0]+'</span><span>⭐ '+wStars+'/30</span>';box.appendChild(head);const grid=document.createElement('div');grid.className='worldGrid';for(let i=first;i<first+10;i++){const b=document.createElement('button');const st=save.stars[i]||0;const locked=i>save.unlocked;b.innerHTML='<div>'+i+'</div><div class="bstars">'+(locked?'🔒':(st?('★'.repeat(st)+'<span class="off">'+'★'.repeat(3-st)+'</span>'):'☆☆☆'))+'</div>';if(locked)b.classList.add('locked');if(save.done[i])b.classList.add('done');if(i===save.unlocked&&!save.done[i])b.classList.add('next');b.disabled=locked;b.onclick=()=>{$('ovLevels').classList.remove('show');enterLevel(i);};grid.appendChild(b);}box.appendChild(grid);wrap.appendChild(box);}}
+document.addEventListener('keydown',e=>{if($('ovIntro').classList.contains('show')){if(e.key==='Enter'||e.key===' '){e.preventDefault();if(!$('btnPlay').disabled)$('btnPlay').click();}return;}if(paused&&e.key.toLowerCase()!=='p')return;const k=e.key.toLowerCase();
  if(k==='h'){$('btnHint').click();return;} if(k==='p'){$('ovPause').classList.toggle('show');paused=!paused;return;}
  if(k.startsWith('arrow')){e.preventDefault();if(k==='arrowup')cursor.r=Math.max(0,cursor.r-1);if(k==='arrowdown')cursor.r=Math.min(N-1,cursor.r+1);if(k==='arrowleft')cursor.c=Math.max(0,cursor.c-1);if(k==='arrowright')cursor.c=Math.min(N-1,cursor.c+1);render();return;}
  if(k==='enter'||k===' '){e.preventDefault();onTap(cursor.r,cursor.c);return;}
  const map={w:[-1,0],s:[1,0],a:[0,-1],d:[0,1]};if(map[k]){const r2=cursor.r+map[k][0],c2=cursor.c+map[k][1];if(r2>=0&&r2<N&&c2>=0&&c2<N){sel=null;trySwap([cursor.r,cursor.c],[r2,c2]);cursor={r:r2,c:c2};}}});
 $('btnSound').textContent=save.sound?'🔊 Sound':'🔇 Muted';
-startLevel(Math.min(save.unlocked,100));
+enterLevel(Math.min(save.unlocked,300));
 </script>
 </body>
 </html>
